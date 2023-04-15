@@ -1,0 +1,20 @@
+1~0~0~2~0~true~0~0~2,4~Jonathan's Closet~Full of clothes based off tv shows he watches. Also, a few pairs of nice clothes. that his parents force him to wear for parties.
+2~1~3~0~0~false~0~0~0~Jonathan's Room~Now the place that’s truly yours in paradise with a comfy bed, and a nice schoolwork desk.Your only place on safety on this hellish world you’re in.
+3~0~4~0~2~false~0~0~4~Jack and Jill's Bathroom~A standard bathroom with all your sanitary needs, this place will help you get started on your journey.
+4~0~5~0~3~false~5~0~11,3~Toy Room~All of your favorite plastic items from all the years, there are some things here that could help you fight out those dastardly ghouls.
+5~0~6~10~4~false~4~0~0~Stair Hallway~This place feels surreal with the fog in the room, and not to mention the melting paint of the walls.
+6~7~8~0~5~false~8~1~14~Parent's Office~A place now a shell of its former self with all papers in the floor. With the computers and printers broken shattered into pieces.
+7~0~0~6~0~false~0~0~7,5,1~Office Closet~All the ink carriages are spilled into the walls, and they are still sticky so you're trying not to get any ink on your clothes.
+8~0~0~9~6~false~0~0~4~Master Bedroom~This place is messy, crazy how they tell you to do your bed but their looks like a bomb went off.
+9~8~0~0~0~false~1~0~10,5~Master Bathroom~It is nasty and toilet debris is all over the floor. There seems to be a toilet doing some thing in the room, maybe it’s the reason for the room's condition.
+10~5~0~14~0~false~0~0~0~Stairs~The carpet is rotting with ants and cock roaches infesting over the failing wood. Probably a good idea to get out of there as fast as possible.
+11~0~12~0~0~false~0~0~5~Pantry~There is food that looks alive and waiting on your very move, so be cautious!
+12~0~14~13~1~false~0~0~12,4~Kitchen~The cabinet doors are barely hanging over, while the kitchen appliances are functioning like crazy.
+13~12~0~0~0~false~0~0~6~Garage~With the cold temperature and the chipped floor, this place isn’t what it used to be.
+14~10~15~0~2~false~6~0~0~Foyer~With the chandelier lights constantly flickering, there is a sort of loneliness in this foyer. Ironic since it's supposed to be inviting.
+15~0~17~16~4~false~3~0~4~Living Room~The sofa rejects you from you try to seat on team, not to mention the floor is lava. Also, that tv doesn’t look right.
+16~15~0~0~0~false~0~0~8~Laundry Room~The washer and dryer are shaking violently with the cabinets shut ting and open ing their doors non-stop.
+17~18~19~0~5~false~7~6~4,5~Guest Bathroom~A step-up from the master bathroom which isn’t saying much. Although the floor is wet as the sink is running.
+18~0~0~17~0~false~2~0~0~Towel Closet~In the closet of used towel, but there isn’t exactly any other alternative to dry the floor.
+19~0~20~0~7~false~0~0~13~Guest Bedroom~With no working lights and a punched hole in the wall some thing going on here.
+20~0~0~0~19~false~0~0~9~Guest Closet~Now a regular old closet, an opportunity to contemplate on what to do next.

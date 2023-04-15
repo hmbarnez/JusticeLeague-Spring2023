@@ -1,0 +1,14 @@
+ARMOR~1~10~Backpack~A backpack you wear to school.
+ARMOR~2~20~Naruto Headband~Your favorite headband.
+ARMOR~3~30~Shrek Mask~A mask you wore last Halloween.
+CONSUM~4~25~Apple Juice~A glass of tasty apple juice.
+CONSUM~5~50~Blue Powerade~A bottle of the bluest energy drink.
+PASSKEY~6~15~Lava-Proof Boots~An old pair of boots that protects the user from Lava.
+PASSKEY~7~9~Plunger~A plunger... it's been used before.
+ACTKEY~8~idk rn~Soap~ A bar of soap...
+BOSSKEY~9~idk rn prob should hold an id of the monster to spawn~Polaroid~An old photo...
+PASSKEY~10~10~Mysterious Key~Unlocks the stairs.
+WEAPON~11~5~Baseball Bat~A baseball bat used slam homers.
+WEAPON~12~15~Mentos & Coke~A tube of mentos and a bottle of brown soda. Can be used offensively.
+WEAPON~13~20~Nerf Gun~A nerf gun loaded with soft plastic bullets that still hurt.
+WEAPON~14~10~Stapler~A stapler loaded with staples ready to be used.

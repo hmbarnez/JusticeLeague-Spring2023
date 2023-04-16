@@ -39,7 +39,7 @@ public class Map implements Serializable {
                 directions[2] = Integer.parseInt(roomArray[3]);
                 directions[3] = Integer.parseInt(roomArray[4]);
                 boolean isVisited = Boolean.parseBoolean(roomArray[5]);
-                // checking for MonsterId from monstersArrayList to add monster to room
+                // checking for monsterId from monstersArrayList to add monster to room
                 int monsterId = Integer.parseInt(roomArray[6]);
                 Monster tempMons = null;
                 if (!(monsterId==0)){
@@ -52,8 +52,40 @@ public class Map implements Serializable {
                     //empty monster place holder for rooms without monsters
                     tempMons = new Monster();//TODO add no param constructor to monster class for place holder monster -Harrison
                 }
+                // checking for puzzleId from puzzlesArrayList to add puzzle to room
+                int puzzleId = Integer.parseInt(roomArray[7]);
+                Puzzle tempPuzz = null;
+                if (!(puzzleId==0)){
+                    for (Puzzle x: puzzlesArrayList){
+                        if(puzzleId == x.getPuzzId()){
+                            tempPuzz = x;
+                        }
+                    }
+                }else{
+                    //empty puzzle place holder for rooms without puzzles
+                    tempPuzz = new Puzzle();
+                }
 
+                roomArrayList.add(roomId,directions,isVisited,monsterId,puzzleId,itemsArrayList,roomName,roomDescription);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return roomArrayList;
+    }
 
+    public ArrayList<Monster> readMonsters(){
+        ArrayList<Monster> monsters = new ArrayList<>();
+        try{
+            Scanner scan = new Scanner(new File("GameInformation/monstersInformation/txt"));
+            while (scan.hasNextLine()){
+                String[] lineSplit = scan.nextLine().split("~");
+
+                int monsterId = Integer.parseInt(lineSplit[0]);
+                int attackDmg = Integer.parseInt(lineSplit[1]);
+                int healthPoints = Integer.parseInt(lineSplit[2]);
+                String monsterName = lineSplit[3];
+                String monsterDesc = lineSplit[4];
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

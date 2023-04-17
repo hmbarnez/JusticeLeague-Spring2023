@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -126,6 +127,41 @@ public class Map implements Serializable {
             throw new RuntimeException(e);
         }
         return puzzles;
+    }
+
+    public ArrayList<Item> readItems(){
+        ArrayList<Item> items = new ArrayList<>();
+        try{
+            Scanner scan = new Scanner(new File("GameInformation/itemsInformation.txt"));
+            while (scan.hasNextLine()){
+                String[] lineSplit = scan.nextLine().split("~");
+
+                String itemType = lineSplit[0];
+                int itemId = Integer.parseInt(lineSplit[1]);
+                String itemName = lineSplit[2];
+                String itemDesc = lineSplit[3];
+                if (itemType.equals("ARMOR")){
+                    
+                } else if (itemType.equals("CONSUM")) {
+
+                    items.add(new Consumable());
+                } else if (itemType.equals("PASSKEY")) {
+
+                    items.add(new PassiveKey());
+                } else if (itemType.equals("ACTKEY")) {
+
+                    items.add(new ActiveKey());
+                } else if (itemType.equals("BOSSKEY")) {
+
+                    items.add(new BossKey());
+                } else if (itemType.equals("WEAPON")) {
+
+                    items.add(new Weapon());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

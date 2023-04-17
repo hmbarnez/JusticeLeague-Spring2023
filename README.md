@@ -23,3 +23,4 @@ puzzlesInformation.txt
 int puzzleId, int puzzleAttempts, String puzzleName, String puzzleDescription, String puzzlePrompt, String Q1, String A1...
   
 --------------------------------------------------------------------------
+ txt

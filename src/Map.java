@@ -16,9 +16,9 @@ public class Map implements Serializable {
 
         try {
             Scanner scan = new Scanner(new File("GameInformation/finalProjectMap.txt"));
-//            itemsArrayList = readItems();
-//            puzzlesArrayList = readPuzzles();
-//            monstersArrayList = readMonsters();
+            itemsArrayList = readItems();
+            puzzlesArrayList = readPuzzles();
+            monstersArrayList = readMonsters();
             while (scan.hasNextLine()){
                 int[] directions = new int[4];// array of int values of the roomId next to the current room
                 /* directions array room parameters
@@ -39,7 +39,9 @@ public class Map implements Serializable {
                 directions[2] = Integer.parseInt(roomArray[3]);
                 directions[3] = Integer.parseInt(roomArray[4]);
                 boolean isVisited = Boolean.parseBoolean(roomArray[5]);
-                // checking for monsterId from monstersArrayList to add monster to room
+
+                // checks the id of the monster located in the room
+                // then goes through the list of monsters and adds the correct monster to the room
                 int monsterId = Integer.parseInt(roomArray[6]);
                 Monster tempMons = null;
                 if (!(monsterId==0)){
@@ -52,7 +54,9 @@ public class Map implements Serializable {
                     //empty monster place holder for rooms without monsters
                     tempMons = new Monster();//TODO add no param constructor to monster class for place holder monster -Harrison
                 }
-                // checking for puzzleId from puzzlesArrayList to add puzzle to room
+
+                // checks the id of the puzzle located in the room
+                // then goes through the list of puzzles and adds the correct puzzle to the room
                 int puzzleId = Integer.parseInt(roomArray[7]);
                 Puzzle tempPuzz = null;
                 if (!(puzzleId==0)){
@@ -66,7 +70,7 @@ public class Map implements Serializable {
                     tempPuzz = new Puzzle();
                 }
 
-                roomArrayList.add(roomId,directions,isVisited,monsterId,puzzleId,itemsArrayList,roomName,roomDescription);
+                roomArrayList.add(roomId,directions,isVisited,monsterId,puzzleId,ITEMSARRAYLISTNEEDTOCHANGE,roomName,roomDescription);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -74,10 +78,13 @@ public class Map implements Serializable {
         return roomArrayList;
     }
 
+
+
+    //readMonsters method reads the monsters information text document and returns a list of every monster
     public ArrayList<Monster> readMonsters(){
         ArrayList<Monster> monsters = new ArrayList<>();
         try{
-            Scanner scan = new Scanner(new File("GameInformation/monstersInformation/txt"));
+            Scanner scan = new Scanner(new File("GameInformation/monstersInformation.txt"));
             while (scan.hasNextLine()){
                 String[] lineSplit = scan.nextLine().split("~");
 
@@ -86,10 +93,39 @@ public class Map implements Serializable {
                 int healthPoints = Integer.parseInt(lineSplit[2]);
                 String monsterName = lineSplit[3];
                 String monsterDesc = lineSplit[4];
+                monsters.add(new Monster(monsterId, attackDmg, healthPoints, monsterName, monsterDesc));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return monsters;
+    }
+
+    //readPuzzles method reads the puzzles information text document and returns a list of every puzzle
+    public ArrayList<Puzzle> readPuzzles() {
+        ArrayList<Puzzle> puzzles = new ArrayList<>();
+        try{
+            Scanner scan = new Scanner(new File("GameInformation/puzzlesInformation.txt"));
+            while(scan.hasNextLine()){
+                // 0-10
+                String[] lineSplit = scan.nextLine().split("~");
+                int puzzleId = Integer.parseInt(lineSplit[0]);
+                int puzzleAttempts = Integer.parseInt(lineSplit[1]);
+                String puzzleName = lineSplit[2];
+                String puzzleDescription = lineSplit[3];
+                String puzzlePrompt = lineSplit[4];
+                String q1 = lineSplit[5];
+                String a1 = lineSplit[6];
+                String q2 = lineSplit[7];
+                String a2 = lineSplit[8];
+                String q3 = lineSplit[9];
+                String a3 = lineSplit[10];
+                puzzles.add(new Puzzle(puzzleId, puzzleAttempts, puzzleName, puzzleDescription, puzzlePrompt,q1,a1,q2,a2,q3,a3));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return puzzles;
     }
 }
 

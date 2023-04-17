@@ -68,4 +68,8 @@ public class Player implements Serializable
         //TODO
     }
 
+
+    //getters and setters!!
+
+
 }

@@ -10,4 +10,58 @@ public class Room implements Serializable {
     private ArrayList<Item> roomInventory;
     private String roomName;
     private String roomDescription;
+
+    public Room(int roomId, int[] roomDirections, boolean isVisited, Monster roomMonster, Puzzle roomPuzzle, ArrayList<Item> roomInventory, String roomName, String roomDescription) {
+        this.roomId = roomId;
+        this.roomDirections = roomDirections;
+        this.isVisited = isVisited;
+        this.roomMonster = roomMonster;
+        this.roomPuzzle = roomPuzzle;
+        this.roomInventory = roomInventory;
+        this.roomName = roomName;
+        this.roomDescription = roomDescription;
+    }
+
+    //add item method
+
+    // remove item method
+
+    //
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public int[] getRoomDirections() {
+        return roomDirections;
+    }
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public Monster getRoomMonster() {
+        return roomMonster;
+    }
+
+    public Puzzle getRoomPuzzle() {
+        return roomPuzzle;
+    }
+
+    public ArrayList<Item> getRoomInventory() {
+        return roomInventory;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+
+    public void setVisited(boolean visited) {
+        isVisited = visited;
+    }
+
+    //add toString
 }

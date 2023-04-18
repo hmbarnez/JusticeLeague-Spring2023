@@ -140,11 +140,14 @@ public class Map implements Serializable {
                 int itemId = Integer.parseInt(lineSplit[1]);
                 String itemName = lineSplit[2];
                 String itemDesc = lineSplit[3];
-                if (itemType.equals("ARMOR")){
-                    
-                } else if (itemType.equals("CONSUM")) {
 
-                    items.add(new Consumable());
+                //checks the item type and adds the specified item to the list of items
+                if (itemType.equals("ARMOR")){
+                    int armorPoints = Integer.parseInt(lineSplit[4]);
+                    items.add(new Armor(itemId,itemName,itemDesc,armorPoints));
+                } else if (itemType.equals("CONSUM")) {
+                    int hitPointsAdded = Integer.parseInt(lineSplit[4]);
+                    items.add(new Consumable(itemId,itemName,itemDesc,hitPointsAdded));
                 } else if (itemType.equals("PASSKEY")) {
 
                     items.add(new PassiveKey());
@@ -153,10 +156,10 @@ public class Map implements Serializable {
                     items.add(new ActiveKey());
                 } else if (itemType.equals("BOSSKEY")) {
 
-                    items.add(new BossKey());
-                } else if (itemType.equals("WEAPON")) {
 
-                    items.add(new Weapon());
+                } else if (itemType.equals("WEAPON")) {
+                    int attackDmg = Integer.parseInt(lineSplit[4]);
+                    items.add(new Weapon(itemId,itemName,itemDesc,attackDmg));
                 }
             }
         } catch (FileNotFoundException e) {

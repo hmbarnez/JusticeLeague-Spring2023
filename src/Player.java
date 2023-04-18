@@ -56,6 +56,7 @@ public class Player implements Serializable
     public void equipItem(String itemName)
     {
         //TODO
+
     }
     //print out the names of all items in the current room's inventory.
     public void exploreRoomInventory()
@@ -69,7 +70,43 @@ public class Player implements Serializable
     }
 
 
+    
+
+    //need a method to get current player object. like player name for example 
+    //player name is default set to Jonathon
+    public void getPlayer()
+    {
+        //TODO
+    }
+
+    //Method to calculate player damage reduction
+    public void takeDamage(int damage)
+    {
+        int actualDamageTaken = damage - this.armor.getArmorValue();
+        this.currentHP -= actualDamageTaken;
+        System.out.println(this.getPlayer(); + " has recieved " + actualDamageTaken + " damage.");
+        if(this.maxHP <= 0)
+        {
+            this.isAlive = false;
+            System.out.println(this.getPlayer(); + " has died.");
+        }
+
+    }
+    //used to see if player is alive or not after damage is taken
+    public boolean isAlive() 
+    {   
+        if(this.currentHP > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+        )
+        return true;
+    }
+
     //getters and setters!!
-
-
 }

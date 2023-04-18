@@ -24,8 +24,15 @@ public class Monster implements Serializable
     // getters and setters
 
     //Method of attack to target
-    public void attack()
+    public void attack(Player player)
     {
-        //TODO
+        int damageDealt = this.attackDmg;
+        Systout.out.println(this.name + " attacks " 
+        + player.getPlayer() + " for " + damageDealt + " damage.");
+        player.takeDamage(damageDealt);
+        if(!player.isAlive())
+        {
+            System.out.println(player.getPlayer() + " has died.");
+        }
     }
 }

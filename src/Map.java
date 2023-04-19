@@ -1,17 +1,17 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Author: Harrison
 
 public class Map implements Serializable {
     private ArrayList<Room> roomArrayList;
     private ArrayList<Item> itemsArrayList;
     private ArrayList<Monster> monstersArrayList;
     private ArrayList<Puzzle> puzzlesArrayList;
-
+    //TODO refactor all method return typet and add getters for each arraryList field
     public Map() {roomArrayList = new ArrayList<>();}
     public ArrayList<Room> readRooms(){
 
@@ -71,7 +71,22 @@ public class Map implements Serializable {
                     tempPuzz = new Puzzle();
                 }
 
-                roomArrayList.add(roomId,directions,isVisited,monsterId,puzzleId,ITEMSARRAYLISTNEEDTOCHANGE,roomName,roomDescription);
+                //split up the line of item ids from map information txt doc
+                String[] itemIds = roomArray[8].split(",");
+                ArrayList<Item> tempItems = new ArrayList<>();
+                //goes through each item id from txt doc
+                for (String itemId : itemIds) {
+                    //goes through every item in game and if the id from romm doc matches, it ads it to the room inventory arraylist
+                    for(Item x: itemsArrayList){
+                        if(x.getItemID() == Integer.parseInt(itemId)){
+                            tempItems.add(x);
+                        }
+                    }
+                }
+                String roomName = roomArray[9];
+                String roomDescription = roomArray[10];
+
+                roomArrayList.add(roomId,directions,isVisited,monsterId,puzzleId,tempItems,roomName,roomDescription);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -79,6 +94,15 @@ public class Map implements Serializable {
         return roomArrayList;
     }
 
+    //method test using streams
+    //might use later for items but seems too complicated for what i need
+//    public void findItemsInRoom(ArrayList<Item> itemsArrayListTest, String itemIdTest){
+//        itemsArrayListTest.stream().filter(o ->String.valueOf(o.getItemID()).equals(itemIdTest)).forEach(
+//                o -> {
+//
+//                }
+//        );
+//    }
 
 
     //readMonsters method reads the monsters information text document and returns a list of every monster
@@ -145,17 +169,25 @@ public class Map implements Serializable {
                 if (itemType.equals("ARMOR")){
                     int armorPoints = Integer.parseInt(lineSplit[4]);
                     items.add(new Armor(itemId,itemName,itemDesc,armorPoints));
+
                 } else if (itemType.equals("CONSUM")) {
                     int hitPointsAdded = Integer.parseInt(lineSplit[4]);
                     items.add(new Consumable(itemId,itemName,itemDesc,hitPointsAdded));
+
                 } else if (itemType.equals("PASSKEY")) {
+                    int roomToUnlock = Integer.parseInt(lineSplit[4]);
+                    items.add(new PassiveKey(itemId,itemName,itemDesc,roomToUnlock));
 
-                    items.add(new PassiveKey());
                 } else if (itemType.equals("ACTKEY")) {
+                    //TODO figure out what to do for active key and change this variable and the text doc!!!!
+                    //also need to add the class for active/boss key if we do that
+                    String temp = lineSplit[4];
+                    items.add(new ActiveKey(jtemId,itemName,itemDesc,temp));
 
-                    items.add(new ActiveKey());
                 } else if (itemType.equals("BOSSKEY")) {
-
+                    //TODO same thing as active key
+                    String temp = lineSplit[4];
+                    items.add(new ActiveKey(jtemId,itemName,itemDesc,temp));
 
                 } else if (itemType.equals("WEAPON")) {
                     int attackDmg = Integer.parseInt(lineSplit[4]);
@@ -165,6 +197,7 @@ public class Map implements Serializable {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return items;
     }
 }
 

@@ -23,9 +23,24 @@ public class Room implements Serializable {
     }
 
     //add item method
+    public void addItem(Item item){
+        this.roomInventory.add(item);
+    }
 
-    // remove item method
-
+    //TODO :
+    //remove item : Room
+   /* public void removeItem(Item item) {
+        int index = -1;
+        for (int i = 0; i < roomInventory.size(); i++) {
+            if (roomInventory.get(i).getName().equals(item.getName())) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            roomInventory.remove(index);
+        }
+    }*/
     //
     public int getRoomId() {
         return roomId;

@@ -70,6 +70,40 @@ public class Player implements Serializable {
 
     }
 
+
+    //Author: Harrison Barnes
+    //methods for game class to view player and room inventory in numbered order
+    public boolean viewPlayerInventory(){
+        if(!this.playerInventory.isEmpty()){
+            for(int i=1; i< playerInventory.size()+1; i++){
+                System.out.println(i + " " +playerInventory.get(i-1).toString());
+            }
+            return true;
+        }else{
+            System.out.println("You haven't picked up any items yet!");
+        }
+        return false;
+    }
+
+    //Author: Harrison Barnes
+    public boolean viewRoomInventory(){
+        //Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
+        ArrayList<Item> currentRoomInv = rooms.get(this.getCurrentRoomID()-1).getRoomInventory();
+        if(!currentRoomInv.isEmpty()){
+            for(int i=1; i < currentRoomInv.size()+1; i++){
+                System.out.println(i + " " +currentRoomInv.get(i-1).toString());
+            }
+            return true;
+        }else{
+            System.out.println("There are no items in this room!");
+        }
+        return false;
+    }
+
+
+
+
+    //Getters
     public int getCurrentRoomID() {
         return currentRoomID;
     }

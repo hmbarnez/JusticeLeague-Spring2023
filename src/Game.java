@@ -9,8 +9,12 @@ public class Game {
         //Main Menu
         mainMenuIntro();
     }
-
-
+    /*Author: Harrison Barnes
+     * Game class takes in user input to control the user's character.
+     * The newGame method is where the main input loop is found.
+     * The mainMenuIntro method asks the user to start a new game or load from previous save.
+     * Items and Room inventory menus displays all items in the room and allows user to take further action or do nothing.
+     */
     public static void newGame(){
         map = new Map();
         player = new Player(map);
@@ -31,7 +35,7 @@ public class Game {
                     case 2 ->
                         //calls inventory menu method
                         //opens up inventory menu and allows user to interact specified item in their inventory
-                            viewInventoryMenu();
+                            viewPlayerInventoryMenu();
                     case 3 ->
                         //search room method
                         //displays room inventory and allows user to pickup items or return to this menu
@@ -77,11 +81,13 @@ public class Game {
     }
 
     //inventory menu
-    public static void viewInventoryMenu(){
+    public static void viewPlayerInventoryMenu(){
         System.out.println("Choose one of the following: ");
-        player.viewPlayerInventory();
-        boolean exitItemMenu = false;
-        while (!exitItemMenu){
+
+        //viewPlayerInventory returns true if there is something in the ArrayList
+        //if playerInventory ArrayList is empty, the while loop is skipped
+        boolean exitItemMenu = player.viewPlayerInventory();
+        while (exitItemMenu){
             try{
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
                 System.out.println("Need to change but this prompt. Choose what to do with this item: ");
@@ -115,16 +121,18 @@ public class Game {
         System.out.println("Delete this sout but end of inventory method");
     }
 
+    //viewPlayerInventory returns true if there is something in the ArrayList
+    //if playerInventory ArrayList is empty, the while loop is skipped
     public static void roomInventoryMenu(){
-        printRoomItemOptions();
-        player.printRoomInventory();
-        boolean exitItemInventory = false;
-        while(!exitItemInventory){
+
+        boolean exitRoomInventory = player.viewRoomInventory();
+        while(exitRoomInventory){
+            printRoomItemOptions();
             try {
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
                 switch (itemChoiceId){
                     case 0:
-                        exitItemInventory = true;
+                        exitRoomInventory = true;
                         break;
                     case 1:
                         player.pickupItem(itemChoiceId);

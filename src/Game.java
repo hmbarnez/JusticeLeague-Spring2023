@@ -23,27 +23,22 @@ public class Game {
                 int userInput = Integer.parseInt(scan.nextLine());
                 //displays user options and gets user input
                 printUserOptions();
-                switch(userInput){
-                    case 1:
+                switch (userInput) {
+                    case 1 -> {
                         printMoveDirections();
                         player.move(userInput);
-                        break;
-                    case 2:
+                    }
+                    case 2 ->
                         //calls inventory menu method
-                        viewInventoryMenu();
-                        break;
-                    case 3:
+                        //opens up inventory menu and allows user to interact specified item in their inventory
+                            viewInventoryMenu();
+                    case 3 ->
                         //search room method
-                        roomInventoryMenu();
-                        break;
-                    case 4:
-                        saveGame();
-                        break;
-                    case 5:
-                        System.exit(0);
-                        break;
-                    default:
-                        printErrorMessage();
+                        //displays room inventory and allows user to pickup items or return to this menu
+                            roomInventoryMenu();
+                    case 4 -> saveGame();
+                    case 5 -> System.exit(0);
+                    default -> printErrorMessage();
                 }
             }catch (NumberFormatException e){
                 printErrorMessage();
@@ -57,14 +52,13 @@ public class Game {
     public static void mainMenuIntro(){
         System.out.println("Welcome to: Let Me Go!");
         boolean validInput = false;
-        int input = 0;
-        while(true){
+        while(!validInput){
             System.out.println("Enter the corresponding number to choose an option: ");
             System.out.println("1. New Game");
             System.out.println("2. Load Game");
-            Scanner scan = new Scanner(System.in);
+            //Scanner scan = new Scanner(System.in);
             try{
-                input = Integer.parseInt(scan.nextLine());
+                int input = Integer.parseInt(scan.nextLine());
                 switch (input){
                     case 1:
                         newGame();
@@ -76,8 +70,7 @@ public class Game {
                         System.err.println("That input is not valid!");
                 }
             }catch (NumberFormatException e){
-                System.err.println("That input is not valid!");
-                System.out.println("___________________________________________");
+                printErrorMessage();
             }
         }
 

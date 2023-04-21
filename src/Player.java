@@ -101,7 +101,45 @@ public class Player implements Serializable {
     }
 
 
+    //Author: Brian Morga
+    //pick up item
+    public void pickUpItem(int itemID){
+        Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
+        ArrayList<Item> currentRoomInv = currentRoom.getRoomInventory();
+        if(!currentRoomInv.isEmpty()){
+            for(int i=0; i < currentRoomInv.size(); i++){
+                if(currentRoomInv.get(i).getItemID() == itemID){
+                    this.playerInventory.add(currentRoomInv.get(i));
+                    currentRoomInv.remove(i);
+                    System.out.println("You picked up the item!");
+                    return;
+                }
+            }
+            System.out.println("That item is not in this room!");
+        }else{
+            System.out.println("There are no items in this room!");
+        }
+    }
 
+    //Author: Brian Morga
+    //drop item
+    public void dropItem(int itemID){
+        Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
+        ArrayList<Item> currentRoomInv = currentRoom.getRoomInventory();
+        if(!this.playerInventory.isEmpty()){
+            for(int i=0; i < this.playerInventory.size(); i++){
+                if(this.playerInventory.get(i).getItemID() == itemID){
+                    currentRoomInv.add(this.playerInventory.get(i));
+                    this.playerInventory.remove(i);
+                    System.out.println("You dropped the item!");
+                    return;
+                }
+            }
+            System.out.println("That item is not in your inventory!");
+        }else{
+            System.out.println("You don't have any items to drop!");
+        }
+    }
 
     //Getters
     public int getCurrentRoomID() {

@@ -26,8 +26,8 @@ public abstract class Item implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "?";
+    public String itemtoString() {
+        return "ItemName";
     }
 
 

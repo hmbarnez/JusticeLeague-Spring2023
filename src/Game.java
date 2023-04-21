@@ -3,7 +3,9 @@ import java.util.Scanner;
 public class Game {
     private static Map map;
     private static Player player;
+    private static Scanner scan;
     public static void main(String[] args) {
+        scan = new Scanner(System.in);
         //Main Menu
         mainMenuIntro();
     }
@@ -12,21 +14,36 @@ public class Game {
     public static void newGame(){
         map = new Map();
         player = new Player(map);
-        Scanner scan = new Scanner(System.in);
+        //trying something different with scan might change later
+        //scan = new Scanner(System.in);
 
         while(true){
             //might change later but for now if user input is not an int value the user has to enter input again
             try {
+                int userInput = Integer.parseInt(scan.nextLine());
                 //displays user options and gets user input
                 printUserOptions();
-                int userInput = Integer.parseInt(scan.nextLine());
-
-                if(userInput == 0){//MOVE OPTION
-                    printMoveDirections();
-                    userInput = Integer.parseInt(scan.nextLine());
-                    player.move(userInput);
-                }else if(userInput ==1){//INVENTORY OPTION
-                    player.viewPlayerInventory();
+                switch(userInput){
+                    case 1:
+                        printMoveDirections();
+                        player.move(userInput);
+                        break;
+                    case 2:
+                        //calls inventory menu method
+                        viewInventoryMenu();
+                        break;
+                    case 3:
+                        //search room method
+                        roomInventoryMenu();
+                        break;
+                    case 4:
+                        saveGame();
+                        break;
+                    case 5:
+                        System.exit(0);
+                        break;
+                    default:
+                        printErrorMessage();
                 }
             }catch (NumberFormatException e){
                 printErrorMessage();
@@ -36,7 +53,7 @@ public class Game {
     }
 
 
-
+    //Main menu
     public static void mainMenuIntro(){
         System.out.println("Welcome to: Let Me Go!");
         boolean validInput = false;
@@ -66,9 +83,76 @@ public class Game {
 
     }
 
-    //TODO change return type to Player i think
+    //inventory menu
+    public static void viewInventoryMenu(){
+        System.out.println("Choose one of the following: ");
+        player.viewPlayerInventory();
+        boolean exitItemMenu = false;
+        while (!exitItemMenu){
+            try{
+                int itemChoiceId = Integer.parseInt(scan.nextLine());
+                System.out.println("Need to change but this prompt. Choose what to do with this item: ");
+                printSelectedItemOptions();
+                int userInput = Integer.parseInt(scan.nextLine());
+
+                switch (userInput){
+                    case 1:
+                        player.dropItem(itemChoiceId);
+                        exitItemMenu = true;
+                        break;
+                    case 2:
+                        player.equipItem(itemChoiceId);
+                        exitItemMenu = true;
+                        break;
+                    case 3:
+                        player.useItem(itemChoiceId);
+                        exitItemMenu = true;
+                        break;
+                    case 4:
+                        exitItemMenu = true;
+                        break;
+                    default:
+                        printErrorMessage();
+                }
+
+            }catch (NumberFormatException e){
+                printErrorMessage();
+            }
+        }
+        System.out.println("Delete this sout but end of inventory method");
+    }
+
+    public static void roomInventoryMenu(){
+        printRoomItemOptions();
+        player.printRoomInventory();
+        boolean exitItemInventory = false;
+        while(!exitItemInventory){
+            try {
+                int itemChoiceId = Integer.parseInt(scan.nextLine());
+                switch (itemChoiceId){
+                    case 0:
+                        exitItemInventory = true;
+                        break;
+                    case 1:
+                        player.pickupItem(itemChoiceId);
+                        break;
+                }
+            }catch (NumberFormatException e){
+                printErrorMessage();
+            }
+
+        }
+        System.out.println("Delete this sout but end of inventory method");
+
+    }
+
+
     public static void loadGame(){
-        //does nothing rn
+        //TODO load method also change return type to: Player
+    }
+
+    public static void saveGame(){
+        //TODO save method
     }
 
     // methods to remove some print statements from main method
@@ -79,7 +163,8 @@ public class Game {
         System.out.println("1. Move");
         System.out.println("2. Inventory");
         System.out.println("3. Search Room");
-        System.out.println();
+        System.out.println("4. Save Game");
+        System.out.println("5. Exit Game");
     }
     public static void printMoveDirections(){
         System.out.println("1. North");
@@ -96,8 +181,10 @@ public class Game {
         System.out.println("4. Exit");
     }
     public static void printRoomItemOptions(){
-        System.out.println("1. Pickup");
-        System.out.println("2. Exit");
+//        System.out.println("1. Pickup");
+//        System.out.println("2. Exit");
+        System.out.println("0. Drop");
+        System.out.println("or Choose Corresponding Item # to pickup: ");
     }
     public static void printErrorMessage(){
         System.err.println("Whoops! Your input was invalid. Try again!");

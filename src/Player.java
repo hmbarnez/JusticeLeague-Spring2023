@@ -33,7 +33,7 @@ public class Player implements Serializable {
     public void move(int direction){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
         //Room nextRoom = null;
-
+        direction -= 1;
        if(currentRoom.roomDirections[direction] == 0)
        {
            System.out.println("You can't go that way!");
@@ -44,21 +44,26 @@ public class Player implements Serializable {
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
            System.out.println("Entering: " + currentRoom.getRoomName());
            System.out.println(currentRoom.getRoomDescription());
+
+           //TODO Check for puzzle
+
+           //TODO Check for monster
+
+
+           //check to see if the room has been visited
+           if (currentRoom.isVisited()){
+               System.out.println("This room is familiar...");
+           }
+           //update the isVisited
+           currentRoom.setVisited(true);
        }
         //System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
-
-        //check to see if the room has been visited
-        if (currentRoom.isVisited()){
-            System.out.println("This room is familiar...");
-        }
-        //update the isVisited
-        currentRoom.setVisited(true);
     }
 
 
 
-    //Author: Harrison Barnes
+    //Author: Harrison Barnes and Niecia Say
     //methods for game class to view player and room inventory in numbered order
     public boolean viewPlayerInventory(){
         if(!this.playerInventory.isEmpty()){

@@ -98,6 +98,7 @@ public class Monster implements Serializable
                     if (healthPoints <= 0) {
                         System.out.println("You defeated the " + monsterName + "!");
 
+                      ///////// 
                         // 33% chance of monster dropping item
                         if (random.nextInt(3) == 0) {
                             String itemName = "Consumable Item"; // change this to actual item name
@@ -112,7 +113,7 @@ public class Monster implements Serializable
                     }
 
                     // monster attacks back
-                    int monsterDamage = monsterAttack;
+                    int monsterDamage = attackDmg;
                     System.out.println("The " + monsterName + " dealt " + monsterDamage + " damage!");
                     player.reduceHealth(monsterDamage);
 
@@ -126,12 +127,14 @@ public class Monster implements Serializable
                     }
                     break;
                 case 2:
-                    // TODO: implement item usage
-                    System.out.println("Item usage not implemented yet.");
+                     System.out.println("You run away from the " + monsterName + "!");
+                    combatStatus = false; // exit combat state
                     break;
                 case 3:
-                    System.out.println("You run away from the " + monsterName + "!");
-                    combatStatus = false; // exit combat state
+                    System.out.println("Which item would you like to use?");
+                    player.getPlayerInventory();
+                    int itemChoice = input.nextInt();
+                    player.useItem(itemChoice);
                     break;
                 default:
                     System.out.println("Invalid command!");

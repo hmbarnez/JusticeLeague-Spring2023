@@ -55,7 +55,7 @@ public class Room implements Serializable {
         return roomMonster;
     }
 
-    public Puzzle getRoomPuzzle() {
+    public Puzzle getPuzzle() {
         return roomPuzzle;
     }
 
@@ -83,9 +83,14 @@ public class Room implements Serializable {
         this.roomMonster =  monster;
     }
 
+<<<<<<< HEAD
     public void setLocked(boolean locked) {
         isLocked = locked;
     }
+=======
+
+    //add toString
+>>>>>>> 2726098c9db4bf84d86748b1db596698ac51fc8b
 
     //add toString
     @Override

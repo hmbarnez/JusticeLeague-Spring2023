@@ -33,32 +33,48 @@ public class Player implements Serializable {
     public void move(int direction){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
         //Room nextRoom = null;
-
+        direction -= 1;
        if(currentRoom.roomDirections[direction] == 0)
        {
            System.out.println("You can't go that way!");
        }
        else{
            //updates room
+           //TODO Passive key check
+//           if(rooms.get(currentRoom.roomDirections[direction]).isLocked){
+//               //add isLocked to room and update map class
+//               if (playerInventory.c)
+//           }
            this.setCurrentRoomID(currentRoom.roomDirections[direction]);
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
            System.out.println("Entering: " + currentRoom.getRoomName());
            System.out.println(currentRoom.getRoomDescription());
+
+           //TODO Check for puzzle
+           if((currentRoom.getPuzzle().getPuzzleId() != 0) && !(currentRoom.getPuzzle().isSolved())){
+               currentRoom.getPuzzle().solvePuzzle();
+               if(currentRoom.getPuzzle().isSolved()){
+                   //currentRoom.getRoomMonster().setIsAlive()
+               }
+           }
+           //TODO Check for monster
+
+
+           //check to see if the room has been visited
+           if (currentRoom.isVisited()){
+               System.out.println("This room is familiar...");
+           }
+
+           //update the isVisited
+           currentRoom.setVisited(true);
        }
         //System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
-
-        //check to see if the room has been visited
-        if (currentRoom.isVisited()){
-            System.out.println("This room is familiar...");
-        }
-        //update the isVisited
-        currentRoom.setVisited(true);
     }
 
 
 
-    //Author: Harrison Barnes
+    //Author: Harrison Barnes and Niecia Say
     //methods for game class to view player and room inventory in numbered order
     public boolean viewPlayerInventory(){
         if(!this.playerInventory.isEmpty()){
@@ -128,6 +144,8 @@ public class Player implements Serializable {
                 this.weapon = (Weapon) item;
                 this.attackDmg += this.weapon.getWeaponDmg();
             }
+        }else{
+            System.out.println("You can't equip that item!");
         }
     }
 
@@ -147,14 +165,17 @@ public class Player implements Serializable {
             this.playerInventory.remove(itemID - 1);
         }else if(item instanceof BossKey){
             BossKey bossKey = (BossKey) item;
+
             this.rooms.get(bossKey.getRoomId()-1).setMonster(MONSTERSLIST.get(bossKey.getBossID()-1)); // figure out what to do with this
+
         }else{
             System.out.println("You can't use this item!");
         }
     }
 
     //Author: Adrian Japa
-    //I dont know your plan for these methods but i left them here, just uncomment and commit/push them if you use them -harrison
+    //I dont know your plan for these methods but i left them here,
+    // just uncomment and commit/push them if you use them -harrison
 
 //    public void getPlayer()
 //    {
@@ -207,6 +228,11 @@ public class Player implements Serializable {
         return maxHP;
     }
 
+    public int getCurrentHP()
+    {
+        return currentHP;
+    }
+
     public int getAttackDmg() {
         return attackDmg;
     }
@@ -219,6 +245,11 @@ public class Player implements Serializable {
         return weapon;
     }
 
+    public int setCurrentHP(int currentHP)
+    {
+        this.currentHP = currentHP;
+        return currentHP;
+    }
     private void setCurrentRoomID(int currentRoomID) {
         this.currentRoomID = currentRoomID;
     }

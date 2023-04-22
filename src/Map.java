@@ -190,8 +190,9 @@ public class Map implements Serializable {
 
                 } else if (itemType.equals("BOSSKEY")) {
                     //TODO same thing as active key
-                    int temp = Integer.parseInt(lineSplit[4]);
-                    items.add(new ActiveKey(itemId,itemName,itemDesc,temp));
+                    int roomId = Integer.parseInt(lineSplit[4]);
+                    int boosId = Integer.parseInt(lineSplit[5]);
+                    items.add(new BossKey(itemId,itemName,itemDesc,roomId,boosId));
 
                 } else if (itemType.equals("WEAPON")) {
                     int attackDmg = Integer.parseInt(lineSplit[4]);

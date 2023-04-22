@@ -105,39 +105,29 @@ public class Player implements Serializable {
     //pick up item
     public void pickUpItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
-        ArrayList<Item> currentRoomInv = currentRoom.getRoomInventory();
-        if(!currentRoomInv.isEmpty()){
-            for(int i=0; i < currentRoomInv.size(); i++){
-                if(currentRoomInv.get(i).getItemID() == itemID){
-                    this.playerInventory.add(currentRoomInv.get(i));
-                    currentRoomInv.remove(i);
-                    System.out.println("You picked up the item!");
-                    return;
-                }
-            }
-            System.out.println("That item is not in this room!");
-        }else{
-            System.out.println("There are no items in this room!");
-        }
+        this.playerInventory.add(currentRoom.getRoomInventory().get(itemID-1));
+        currentRoom.removeItem(itemID-1);
     }
+        
+
 
     //Author: Brian Morga
     //drop item
     public void dropItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
-        ArrayList<Item> currentRoomInv = currentRoom.getRoomInventory();
-        if(!this.playerInventory.isEmpty()){
-            for(int i=0; i < this.playerInventory.size(); i++){
-                if(this.playerInventory.get(i).getItemID() == itemID){
-                    currentRoomInv.add(this.playerInventory.get(i));
-                    this.playerInventory.remove(i);
-                    System.out.println("You dropped the item!");
-                    return;
-                }
-            }
-            System.out.println("That item is not in your inventory!");
-        }else{
-            System.out.println("You don't have any items to drop!");
+        currentRoom.addItem(playerInventory.get(itemID-1));
+        this.playerInventory.remove(itemID-1);
+    }
+    
+
+    public void equipItem(int itemID){
+        Item item = this.playerInventory.get(itemID-1);
+        if(item instanceof Armor){
+            this.armor = (Armor) item;
+            this.maxHP += this.armor.getArmorPoints();
+        }else if(item instanceof Weapon){
+            this.weapon = (Weapon) item;
+            this.attackDmg += this.weapon.getWeaponDmg();
         }
     }
 

@@ -29,19 +29,27 @@ public class Game {
                 //displays user options and gets user input
                 System.out.println("_____________________");
                 switch (userInput) {
-                    case 1 -> {
-                        moveMenu();
+                    case 1,2,3,4 -> {
+                        player.move(userInput);
                     }
-                    case 2 ->
+//                    System.out.println("1. N");
+//                    System.out.println("2. E");
+//                    System.out.println("3. S");
+//                    System.out.println("4. W");
+//                    System.out.println("5. Inventory");
+//                    System.out.println("6. Search Room");
+//                    System.out.println("7. Save Game");
+//                    System.out.println("8. Exit Game");
+                    case 5 ->
                         //calls inventory menu method
                         //opens up inventory menu and allows user to interact specified item in their inventory
                             viewPlayerInventoryMenu();
-                    case 3 ->
+                    case 6 ->
                         //search room method
                         //displays room inventory and allows user to pickup items or return to this menu
                             roomInventoryMenu();
-                    case 4 -> saveGame();
-                    case 5 -> System.exit(0);
+                    case 7 -> saveGame();
+                    case 8 -> System.exit(0);
                     case 55 -> {
                         //used for testing and seeing player's stats
                         System.out.println(player);
@@ -88,7 +96,7 @@ public class Game {
 
     }
 
-    //move menu
+    //move menu not used
     public static void moveMenu(){
 
         boolean exitMoveMenu = false;
@@ -225,11 +233,15 @@ public class Game {
     public static void printUserOptions(){
         System.out.println("__________________________________________________");
         System.out.println("What do you want to do next?");
-        System.out.println("1. Move");
-        System.out.println("2. Inventory");
-        System.out.println("3. Search Room");
-        System.out.println("4. Save Game");
-        System.out.println("5. Exit Game");
+        //System.out.println("1. Move");
+        System.out.println("1. North");
+        System.out.println("2. East");
+        System.out.println("3. South");
+        System.out.println("4. West");
+        System.out.println("5. Inventory");
+        System.out.println("6. Search Room");
+        System.out.println("7. Save Game");
+        System.out.println("8. Exit Game");
     }
     public static void printMoveDirections(){
         System.out.println("1. North");

@@ -65,4 +65,16 @@ public class Monster implements Serializable
     public void setHealthRegen(int healthRegen) {
         this.healthRegen = healthRegen;
     }
+
+    @Override
+    public String toString() {
+        if(this.monsterId == 0){
+            return "No Monster in this Room";
+        }
+        return "Monster{" +
+                "monsterId=" + monsterId +
+                ", monsterName='" + monsterName + '\'' +
+                ", isAlive=" + isAlive +
+                '}';
+    }
 }

@@ -123,6 +123,9 @@ public class Puzzle implements Serializable {
 
     @Override
     public String toString() {
+        if(this.puzzleId == 0){
+            return "No Puzzle in this Room";
+        }
         return "Puzzle{" +
                 "puzzleId=" + puzzleId +
                 ", puzzleAttempts=" + puzzleAttempts +

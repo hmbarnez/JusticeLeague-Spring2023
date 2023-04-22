@@ -132,7 +132,7 @@ public class Player implements Serializable {
         Room currentRoom = this.rooms.get(currentRoomID-1);
         if(item instanceof ActiveKey){
             ActiveKey activeKey = (ActiveKey) item;
-            currentRoom.roomMonster.setRegen(activeKey.getRegenValue());// figure out what to do with this
+            currentRoom.roomMonster.setHealthRegen(activeKey.getRegenValue());// figure out what to do with this
         }else if(item instanceof Consumable){
             this.maxHP += ((Consumable) item).getHitPointsAdded();
         }else if(item instanceof BossKey){
@@ -140,6 +140,43 @@ public class Player implements Serializable {
             this.rooms.get(bossKey.getRoomId()-1).setMonster(MONSTERSLIST.get(bossKey.getBossID()-1)); // figure out what to do with this
         }
     }
+
+    //Author: Adrian Japa
+    //I dont know your plan for these methods but i left them here, just uncomment and commit/push them if you use them -harrison
+
+//    public void getPlayer()
+//    {
+//        //TODO
+//    }
+//
+//    //Method to calculate player damage reduction
+//    public void takeDamage(int damage)
+//    {
+//        int actualDamageTaken = damage - this.armor.getArmorValue();
+//        this.currentHP -= actualDamageTaken;
+//        System.out.println(this.getPlayer(); + " has recieved " + actualDamageTaken + " damage.");
+//        if(this.maxHP <= 0)
+//        {
+//            this.isAlive = false;
+//            System.out.println(this.getPlayer(); + " has died.");
+//        }
+//
+//    }
+//    //used to see if player is alive or not after damage is taken
+//    public boolean isAlive()
+//    {
+//        if(this.currentHP > 0)
+//        {
+//            return true;
+//        }
+//        else
+//        {
+//            return false;
+//        }
+//
+//        )
+//        return true;
+//    }
 
     //Getters
     public int getCurrentRoomID() {

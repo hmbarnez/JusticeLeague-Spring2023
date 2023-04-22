@@ -118,7 +118,9 @@ public class Map implements Serializable {
                 int healthPoints = Integer.parseInt(lineSplit[2]);
                 String monsterName = lineSplit[3];
                 String monsterDesc = lineSplit[4];
-                monsters.add(new Monster(monsterId, attackDmg, healthPoints, monsterName, monsterDesc));
+                boolean isAlive = Boolean.parseBoolean(lineSplit[5]);
+                int healthRegen = Integer.parseInt(lineSplit[6]);
+                monsters.add(new Monster(monsterId,monsterName,monsterDesc,attackDmg,healthPoints,isAlive,healthRegen));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

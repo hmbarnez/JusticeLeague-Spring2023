@@ -72,4 +72,10 @@ public class Puzzle implements Serializable {
     public String getA3() {
         return A3;
     }
+
+
+    //no param constructor for if there are no puzzles in the room
+    public Puzzle(){
+        this.puzzleId = 0;
+    }
 }

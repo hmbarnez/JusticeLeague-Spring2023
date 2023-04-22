@@ -83,8 +83,10 @@ public class Room implements Serializable {
     public String toString() {
         return "Room{" +
                 "roomId=" + roomId +
+                ", roomMonster=" + roomMonster +
+                ", roomPuzzle=" + roomPuzzle +
                 ", roomInventory=" + roomInventory +
-                ", roomDescription='" + roomDescription + '\'' +
+                ", roomName='" + roomName + '\'' +
                 '}';
     }
 }

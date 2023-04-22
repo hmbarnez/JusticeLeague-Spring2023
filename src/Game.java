@@ -43,7 +43,12 @@ public class Game {
                     case 4 -> saveGame();
                     case 5 -> System.exit(0);
                     case 55 -> {
+                        //used for testing and seeing player's stats
                         System.out.println(player);
+                    }
+                    case 66 -> {
+                        //used for testing and seeing player's stats
+                        System.out.println(player.getCurrentRoom());
                     }
                     default -> printErrorMessage();
                 }
@@ -113,11 +118,11 @@ public class Game {
                     default -> printErrorMessage();
                 }
             }catch (NumberFormatException e){
-                System.out.println("MOVEMENU_ERROR");
+                //System.out.println("MOVEMENU_ERROR");
                 printErrorMessage();
             }
         }
-        System.out.println("test sout, end of move menu");
+        //System.out.println("test sout, end of move menu");
     }
 
 
@@ -159,11 +164,11 @@ public class Game {
                 }
 
             }catch (NumberFormatException e){
-                System.out.println("INVMENU_ERROR");
+                //System.out.println("INVMENU_ERROR");
                 printErrorMessage();
             }
         }
-        System.out.println("Delete this sout but end of inventory method");
+        //System.out.println("Delete this sout but end of inventory method");
     }
 
     //viewPlayerInventory returns true if there is something in the ArrayList
@@ -175,19 +180,29 @@ public class Game {
         while(exitRoomInventory){
             try {
                 printRoomItemOptions();
+                //System.out.println("TESTING "+ player.getCurrentRoom().getRoomInventory().size());
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
-                switch (itemChoiceId) {
-                    case 0 -> exitRoomInventory = false;
-                    case 1 -> player.pickupItem(itemChoiceId);
-                    default -> printErrorMessage();
+//                switch (itemChoiceId) {
+//                    case 0 -> exitRoomInventory = false;
+//                    case 1 -> if;
+//                    default -> printErrorMessage();
+//                }
+                if(itemChoiceId == 0){
+                    break;
+                }else if(itemChoiceId > 0 && itemChoiceId <= player.getCurrentRoom().getRoomInventory().size()){
+                    player.pickupItem(itemChoiceId);
+                    break;
+                }else {
+                    printErrorMessage();
                 }
+
             }catch (NumberFormatException e){
-                System.out.println("ROOMINVMENU_ERROR");
+                //System.out.println("ROOMINVMENU_ERROR");
                 printErrorMessage();
             }
 
         }
-        System.out.println("Delete this sout but end of inventory method");
+        //System.out.println("Delete this sout but end of inventory method");
 
     }
 

@@ -7,10 +7,11 @@ public class Player implements Serializable {
     private int currentRoomID;
     private ArrayList<Room> rooms;
     private ArrayList<Item> playerInventory;
-    private int  maxHP;
+    private int maxHP;
     private int attackDmg;
     private Armor armor;
     private Weapon weapon;
+    private int currentHP;
 
     private final ArrayList<Monster> MONSTERSLIST;
     private final ArrayList<Item> ITEMSLIST;
@@ -23,6 +24,7 @@ public class Player implements Serializable {
         this.attackDmg = 10;
         this.armor = null;
         this.weapon = null;
+        this.currentHP = maxHP;
         this.MONSTERSLIST = map.getMonstersArrayList();
         this.ITEMSLIST = map.getItemsArrayList();
     }
@@ -90,9 +92,9 @@ public class Player implements Serializable {
     //Author: Brian Morga
     public void pickupItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
-        System.out.println(currentRoom);
         this.playerInventory.add(currentRoom.getRoomInventory().get(itemID - 1));
         currentRoom.removeItem(itemID);
+        //System.out.println("TESTING " + currentRoom);
     }
         
 
@@ -138,10 +140,16 @@ public class Player implements Serializable {
             ActiveKey activeKey = (ActiveKey) item;
             currentRoom.roomMonster.setHealthRegen(activeKey.getRegenValue());// figure out what to do with this
         }else if(item instanceof Consumable){
-            this.maxHP += ((Consumable) item).getHitPointsAdded();
+            this.currentHP += ((Consumable) item).getHitPointsAdded();
+            if (currentHP > maxHP){
+                this.currentHP = maxHP;
+            }
+            this.playerInventory.remove(itemID - 1);
         }else if(item instanceof BossKey){
             BossKey bossKey = (BossKey) item;
             this.rooms.get(bossKey.getRoomId()-1).setMonster(MONSTERSLIST.get(bossKey.getBossID()-1)); // figure out what to do with this
+        }else{
+            System.out.println("You can't use this item!");
         }
     }
 
@@ -215,6 +223,9 @@ public class Player implements Serializable {
         this.currentRoomID = currentRoomID;
     }
 
+    public Room getCurrentRoom(){
+        return this.rooms.get(currentRoomID-1);
+    }
     @Override
     public String toString() {
         return "Player{" +

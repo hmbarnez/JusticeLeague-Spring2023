@@ -154,7 +154,8 @@ public class Player implements Serializable {
     }
 
     //Author: Adrian Japa
-    //I dont know your plan for these methods but i left them here, just uncomment and commit/push them if you use them -harrison
+    //I dont know your plan for these methods but i left them here,
+    // just uncomment and commit/push them if you use them -harrison
 
 //    public void getPlayer()
 //    {
@@ -207,6 +208,11 @@ public class Player implements Serializable {
         return maxHP;
     }
 
+    public int getCurrentHP()
+    {
+        return currentHP;
+    }
+
     public int getAttackDmg() {
         return attackDmg;
     }
@@ -219,6 +225,11 @@ public class Player implements Serializable {
         return weapon;
     }
 
+    public int setCurrentHP(int currentHP)
+    {
+        this.currentHP = currentHP;
+        return currentHP;
+    }
     private void setCurrentRoomID(int currentRoomID) {
         this.currentRoomID = currentRoomID;
     }

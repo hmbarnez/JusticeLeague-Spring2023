@@ -147,7 +147,8 @@ public class Map implements Serializable {
                 String a2 = lineSplit[8];
                 String q3 = lineSplit[9];
                 String a3 = lineSplit[10];
-                puzzles.add(new Puzzle(puzzleId, puzzleAttempts, puzzleName, puzzleDescription, puzzlePrompt,q1,a1,q2,a2,q3,a3));
+                boolean isSolved = Boolean.parseBoolean(lineSplit[11]);
+                puzzles.add(new Puzzle(puzzleId, puzzleAttempts, puzzleName, puzzleDescription, puzzlePrompt,q1,a1,q2,a2,q3,a3, isSolved));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

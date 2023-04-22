@@ -37,6 +37,10 @@ public class Puzzle implements Serializable {
         this.isSolved = isSolved;
     }
 
+    public Puzzle(){
+        this.puzzleId = 0;
+    }
+
     public void solvePuzzle() {
         Scanner scan = new Scanner(System.in);
         int tempAttempts = this.puzzleAttempts;

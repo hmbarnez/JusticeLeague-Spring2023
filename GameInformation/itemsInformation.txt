@@ -5,8 +5,8 @@ CONSUM~4~Apple Juice~A glass of tasty apple juice.~25
 CONSUM~5~Blue Powerade~A bottle of the bluest energy drink.~50
 PASSKEY~6~Lava-Proof Boots~An old pair of boots that protects the user from Lava.~15
 PASSKEY~7~Plunger~A plunger... it's been used before.~9
-ACTKEY~8~Soap~ A bar of soap...~idk rn
-BOSSKEY~9~Polaroid~An old photo...~idk rn prob should hold an id of the monster to spawn
+ACTKEY~8~Soap~ A bar of soap...~0
+BOSSKEY~9~Polaroid~An old photo...~15~3
 PASSKEY~10~Mysterious Key~Unlocks the stairs.~10
 WEAPON~11~Baseball Bat~A baseball bat used slam homers.~5
 WEAPON~12~Mentos & Coke~A tube of mentos and a bottle of brown soda. Can be used offensively.~15

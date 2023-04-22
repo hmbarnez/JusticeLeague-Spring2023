@@ -3,9 +3,8 @@ import java.util.Scanner;
 public class Game {
     private static Map map;
     private static Player player;
-    private static Scanner scan;
+    //private static Scanner scan;
     public static void main(String[] args) {
-        scan = new Scanner(System.in);
         //Main Menu
         mainMenuIntro();
     }
@@ -18,6 +17,7 @@ public class Game {
     public static void newGame(){
         map = new Map();
         player = new Player(map);
+        Scanner scan = new Scanner(System.in);
         //trying something different with scan might change later
         //scan = new Scanner(System.in);
 
@@ -55,6 +55,7 @@ public class Game {
     //Main menu
     public static void mainMenuIntro(){
         System.out.println("Welcome to: Let Me Go!");
+        Scanner scan = new Scanner(System.in);
         boolean validInput = false;
         while(!validInput){
             System.out.println("Enter the corresponding number to choose an option: ");
@@ -63,12 +64,24 @@ public class Game {
             //Scanner scan = new Scanner(System.in);
             try{
                 int input = Integer.parseInt(scan.nextLine());
+//                if(input == 1){
+//                    System.out.println("test");
+//                    newGame();
+//                    break;
+//                } else if (input == 2) {
+//                    System.out.println("load game");
+//                }
                 switch (input) {
-                    case 1 -> newGame();
+                    case 1 -> {
+                        System.out.println("test");
+                        newGame();
+                        break;
+                    }
                     case 2 -> loadGame();
                     default -> System.err.println("That input is not valid!");
                 }
             }catch (NumberFormatException e){
+                System.out.println("MAINMENU_ERROR");
                 printErrorMessage();
             }
         }
@@ -79,6 +92,7 @@ public class Game {
     public static void moveMenu(){
 
         boolean exitMoveMenu = false;
+        Scanner scan = new Scanner(System.in);
         while(!exitMoveMenu){
             try {
 
@@ -104,6 +118,7 @@ public class Game {
                     default -> printErrorMessage();
                 }
             }catch (NumberFormatException e){
+                System.out.println("MOVEMENU_ERROR");
                 printErrorMessage();
             }
         }
@@ -114,7 +129,7 @@ public class Game {
     //inventory menu
     public static void viewPlayerInventoryMenu(){
         System.out.println("Choose one of the following: ");
-
+        Scanner scan = new Scanner(System.in);
         //viewPlayerInventory returns true if there is something in the ArrayList
         //if playerInventory ArrayList is empty, the while loop is skipped
         boolean exitItemMenu = player.viewPlayerInventory();
@@ -144,6 +159,7 @@ public class Game {
                 }
 
             }catch (NumberFormatException e){
+                System.out.println("INVMENU_ERROR");
                 printErrorMessage();
             }
         }
@@ -153,7 +169,7 @@ public class Game {
     //viewPlayerInventory returns true if there is something in the ArrayList
     //if playerInventory ArrayList is empty, the while loop is skipped
     public static void roomInventoryMenu(){
-
+        Scanner scan = new Scanner(System.in);
         boolean exitRoomInventory = player.viewRoomInventory();
         while(exitRoomInventory){
             printRoomItemOptions();
@@ -170,6 +186,7 @@ public class Game {
                         printErrorMessage();
                 }
             }catch (NumberFormatException e){
+                System.out.println("ROOMINVMENU_ERROR");
                 printErrorMessage();
             }
 

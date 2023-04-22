@@ -9,7 +9,7 @@ public class Room implements Serializable {
     private int roomId;
     public int[] roomDirections;
     private boolean isVisited;
-    private Monster roomMonster;
+    public Monster roomMonster;
     private Puzzle roomPuzzle;
     private ArrayList<Item> roomInventory;
     private String roomName;
@@ -71,6 +71,10 @@ public class Room implements Serializable {
 
     public void setVisited(boolean visited) {
         isVisited = visited;
+    }
+
+    public void setMonster(Monster monster) {
+        this.roomMonster =  monster;
     }
 
     //add toString

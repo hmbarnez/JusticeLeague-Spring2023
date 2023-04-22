@@ -62,7 +62,7 @@ public class Map implements Serializable {
                 Puzzle tempPuzz = null;
                 if (!(puzzleId==0)){
                     for (Puzzle x: puzzlesArrayList){
-                        if(puzzleId == x.getPuzzId()){
+                        if(puzzleId == x.getPuzzleId()){
                             tempPuzz = x;
                         }
                     }
@@ -86,7 +86,7 @@ public class Map implements Serializable {
                 String roomName = roomArray[9];
                 String roomDescription = roomArray[10];
 
-                roomArrayList.add(roomId,directions,isVisited,monsterId,puzzleId,tempItems,roomName,roomDescription);
+                roomArrayList.add( new Room(roomId,directions,isVisited,tempMons,tempPuzz,tempItems,roomName,roomDescription));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -181,13 +181,13 @@ public class Map implements Serializable {
                 } else if (itemType.equals("ACTKEY")) {
                     //TODO figure out what to do for active key and change this variable and the text doc!!!!
                     //also need to add the class for active/boss key if we do that
-                    String temp = lineSplit[4];
-                    items.add(new ActiveKey(jtemId,itemName,itemDesc,temp));
+                    int temp = Integer.parseInt(lineSplit[4]);
+                    items.add(new ActiveKey(itemId,itemName,itemDesc,temp));
 
                 } else if (itemType.equals("BOSSKEY")) {
                     //TODO same thing as active key
-                    String temp = lineSplit[4];
-                    items.add(new ActiveKey(jtemId,itemName,itemDesc,temp));
+                    int temp = Integer.parseInt(lineSplit[4]);
+                    items.add(new ActiveKey(itemId,itemName,itemDesc,temp));
 
                 } else if (itemType.equals("WEAPON")) {
                     int attackDmg = Integer.parseInt(lineSplit[4]);
@@ -198,6 +198,14 @@ public class Map implements Serializable {
             throw new RuntimeException(e);
         }
         return items;
+    }
+
+    public ArrayList<Item> getItemsArrayList() {
+        return itemsArrayList;
+    }
+
+    public ArrayList<Monster> getMonstersArrayList() {
+        return monstersArrayList;
     }
 }
 

@@ -12,6 +12,9 @@ public class Player implements Serializable {
     private Armor armor;
     private Weapon weapon;
 
+    private final ArrayList<Monster> MONSTERSLIST;
+    private final ArrayList<Item> ITEMSLIST;
+
     public Player(Map map){
         this.currentRoomID = 1;
         this.rooms = map.readRooms();
@@ -20,6 +23,8 @@ public class Player implements Serializable {
         this.attackDmg = 10;
         this.armor = null;
         this.weapon = null;
+        this.MONSTERSLIST = map.getMonstersArrayList();
+        this.ITEMSLIST = map.getItemsArrayList();
     }
 
     //Author: Niecia
@@ -81,7 +86,7 @@ public class Player implements Serializable {
 
 
     //Author: Brian Morga
-    public void pickUpItem(int itemID){
+    public void pickupItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
         this.playerInventory.add(currentRoom.getRoomInventory().get(itemID-1));
         currentRoom.removeItem(itemID-1);
@@ -128,12 +133,12 @@ public class Player implements Serializable {
         Room currentRoom = this.rooms.get(currentRoomID-1);
         if(item instanceof ActiveKey){
             ActiveKey activeKey = (ActiveKey) item;
-            currentRoom.monster.setRegen(activeKey.getValue());// figure out what to do with this
+            currentRoom.roomMonster.setRegen(activeKey.getRegenValue());// figure out what to do with this
         }else if(item instanceof Consumable){
             this.maxHP += ((Consumable) item).getHitPointsAdded();
         }else if(item instanceof BossKey){
             BossKey bossKey = (BossKey) item;
-            this.rooms.get(bossKey.getRoomId()).setMonster(); // figure out what to do with this
+            this.rooms.get(bossKey.getRoomId()-1).setMonster(MONSTERSLIST.get(bossKey.getBossID()-1)); // figure out what to do with this
         }
     }
 

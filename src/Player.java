@@ -30,27 +30,26 @@ public class Player implements Serializable {
     //Author: Niecia
     public void move(int direction){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
-        Room nextRoom = null;
+        //Room nextRoom = null;
 
-       int index = direction-1;
-       if(currentRoom.roomDirections[index] == 0)
+       if(currentRoom.roomDirections[direction] == 0)
        {
            System.out.println("No room.");
        }
        else{
            //updates room
-           setCurrentRoomID(currentRoom.roomDirections[index]);
+           setCurrentRoomID(currentRoom.roomDirections[direction]);
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
        }
-        System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
+        //System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
 
         //check to see if the room has been visited
-        if (nextRoom.isVisited()){
+        if (currentRoom.isVisited()){
             System.out.println("This room is familiar...");
         }
         //update the isVisited
-        nextRoom.setVisited(true);
+        currentRoom.setVisited(true);
     }
 
 

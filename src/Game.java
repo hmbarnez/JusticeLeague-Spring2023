@@ -24,13 +24,13 @@ public class Game {
         while(true){
             //might change later but for now if user input is not an int value the user has to enter input again
             try {
+                printUserOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
                 //displays user options and gets user input
-                printUserOptions();
+                System.out.println("_________________________");
                 switch (userInput) {
                     case 1 -> {
-                        printMoveDirections();
-                        player.move(userInput);
+                        moveMenu();
                     }
                     case 2 ->
                         //calls inventory menu method
@@ -63,15 +63,10 @@ public class Game {
             //Scanner scan = new Scanner(System.in);
             try{
                 int input = Integer.parseInt(scan.nextLine());
-                switch (input){
-                    case 1:
-                        newGame();
-                        break;
-                    case 2:
-                        loadGame();
-                        break;
-                    default:
-                        System.err.println("That input is not valid!");
+                switch (input) {
+                    case 1 -> newGame();
+                    case 2 -> loadGame();
+                    default -> System.err.println("That input is not valid!");
                 }
             }catch (NumberFormatException e){
                 printErrorMessage();
@@ -79,6 +74,42 @@ public class Game {
         }
 
     }
+
+    //move menu
+    public static void moveMenu(){
+
+        boolean exitMoveMenu = false;
+        while(!exitMoveMenu){
+            try {
+
+                printMoveDirections();
+                int moveDirection = Integer.parseInt(scan.nextLine());
+                switch (moveDirection) {
+                    case 1 -> {
+                        player.move(0);
+                        exitMoveMenu = true;
+                    }
+                    case 2 -> {
+                        player.move(1);
+                        exitMoveMenu = true;
+                    }
+                    case 3 -> {
+                        player.move(2);
+                        exitMoveMenu = true;
+                    }
+                    case 4 -> {
+                        player.move(3);
+                        exitMoveMenu = true;
+                    }
+                    default -> printErrorMessage();
+                }
+            }catch (NumberFormatException e){
+                printErrorMessage();
+            }
+        }
+        System.out.println("test sout, end of move menu");
+    }
+
 
     //inventory menu
     public static void viewPlayerInventoryMenu(){
@@ -90,28 +121,26 @@ public class Game {
         while (exitItemMenu){
             try{
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
+                System.out.println("_________________________");
                 System.out.println("Need to change but this prompt. Choose what to do with this item: ");
                 printSelectedItemOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
 
-                switch (userInput){
-                    case 1:
+                switch (userInput) {
+                    case 1 -> {
                         player.dropItem(itemChoiceId);
                         exitItemMenu = true;
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         player.equipItem(itemChoiceId);
                         exitItemMenu = true;
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         player.useItem(itemChoiceId);
                         exitItemMenu = true;
-                        break;
-                    case 4:
-                        exitItemMenu = true;
-                        break;
-                    default:
-                        printErrorMessage();
+                    }
+                    case 4 -> exitItemMenu = true;
+                    default -> printErrorMessage();
                 }
 
             }catch (NumberFormatException e){
@@ -137,6 +166,8 @@ public class Game {
                     case 1:
                         player.pickupItem(itemChoiceId);
                         break;
+                    default:
+                        printErrorMessage();
                 }
             }catch (NumberFormatException e){
                 printErrorMessage();

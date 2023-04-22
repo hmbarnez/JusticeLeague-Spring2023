@@ -18,6 +18,8 @@ public class Player implements Serializable {
         this.playerInventory = new ArrayList<>();
         this.maxHP = 100;
         this.attackDmg = 10;
+        this.armor = null;
+        this.weapon = null;
     }
 
     //move rooms: associated with numbers
@@ -102,7 +104,6 @@ public class Player implements Serializable {
 
 
     //Author: Brian Morga
-    //pick up item
     public void pickUpItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
         this.playerInventory.add(currentRoom.getRoomInventory().get(itemID-1));
@@ -112,22 +113,50 @@ public class Player implements Serializable {
 
 
     //Author: Brian Morga
-    //drop item
     public void dropItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
         currentRoom.addItem(playerInventory.get(itemID-1));
         this.playerInventory.remove(itemID-1);
     }
     
-
+    //Author: Brian Morga
     public void equipItem(int itemID){
         Item item = this.playerInventory.get(itemID-1);
         if(item instanceof Armor){
-            this.armor = (Armor) item;
-            this.maxHP += this.armor.getArmorPoints();
+            if(this.armor != null){
+                this.armor = (Armor) item;
+                this.maxHP += this.armor.getArmorPoints();
+            } else {
+                this.maxHP -= this.armor.getArmorPoints();
+                this.armor = (Armor) item;
+                this.maxHP += this.armor.getArmorPoints();
+            }
+            
         }else if(item instanceof Weapon){
+            if(this.weapon != null){
             this.weapon = (Weapon) item;
             this.attackDmg += this.weapon.getWeaponDmg();
+            } else {
+                this.attackDmg -= this.weapon.getWeaponDmg();
+                this.weapon = (Weapon) item;
+                this.attackDmg += this.weapon.getWeaponDmg();
+            }
+        }
+    }
+
+    //Author: Brian Morga
+    //method to use item in player inventory
+    public void useItem(int itemID){
+        Item item = this.playerInventory.get(itemID-1);
+        Room currentRoom = this.rooms.get(currentRoomID-1);
+        if(item instanceof ActiveKey){
+            ActiveKey activeKey = (ActiveKey) item;
+            currentRoom.monster.setRegen(activeKey.getValue());// figure out what to do with this
+        }else if(item instanceof Consumable){
+            this.maxHP += ((Consumable) item).getHitPointsAdded();
+        }else if(item instanceof BossKey){
+            BossKey bossKey = (BossKey) item;
+            this.rooms.get(bossKey.getRoomId()).setMonster(); // figure out what to do with this
         }
     }
 

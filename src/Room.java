@@ -78,4 +78,13 @@ public class Room implements Serializable {
     }
 
     //add toString
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomId=" + roomId +
+                ", roomInventory=" + roomInventory +
+                ", roomDescription='" + roomDescription + '\'' +
+                '}';
+    }
 }

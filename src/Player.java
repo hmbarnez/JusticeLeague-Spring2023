@@ -34,12 +34,14 @@ public class Player implements Serializable {
 
        if(currentRoom.roomDirections[direction] == 0)
        {
-           System.out.println("No room.");
+           System.out.println("You can't go that way!");
        }
        else{
            //updates room
-           setCurrentRoomID(currentRoom.roomDirections[direction]);
+           this.setCurrentRoomID(currentRoom.roomDirections[direction]);
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
+           System.out.println("Entering: " + currentRoom.getRoomName());
+           System.out.println(currentRoom.getRoomDescription());
        }
         //System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
@@ -72,6 +74,7 @@ public class Player implements Serializable {
     public boolean viewRoomInventory(){
         //Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
         ArrayList<Item> currentRoomInv = rooms.get(this.getCurrentRoomID()-1).getRoomInventory();
+        System.out.println("Items in this room: ");
         if(!currentRoomInv.isEmpty()){
             for(int i=1; i < currentRoomInv.size()+1; i++){
                 System.out.println(i + " " +currentRoomInv.get(i-1).toString());
@@ -87,8 +90,9 @@ public class Player implements Serializable {
     //Author: Brian Morga
     public void pickupItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
-        this.playerInventory.add(currentRoom.getRoomInventory().get(itemID-1));
-        currentRoom.removeItem(itemID-1);
+        System.out.println(currentRoom);
+        this.playerInventory.add(currentRoom.getRoomInventory().get(itemID - 1));
+        currentRoom.removeItem(itemID);
     }
         
 
@@ -104,7 +108,7 @@ public class Player implements Serializable {
     public void equipItem(int itemID){
         Item item = this.playerInventory.get(itemID-1);
         if(item instanceof Armor){
-            if(this.armor != null){
+            if(this.armor == null){
                 this.armor = (Armor) item;
                 this.maxHP += this.armor.getArmorPoints();
             } else {
@@ -114,7 +118,7 @@ public class Player implements Serializable {
             }
             
         }else if(item instanceof Weapon){
-            if(this.weapon != null){
+            if(this.weapon == null){
             this.weapon = (Weapon) item;
             this.attackDmg += this.weapon.getWeaponDmg();
             } else {
@@ -209,5 +213,17 @@ public class Player implements Serializable {
 
     private void setCurrentRoomID(int currentRoomID) {
         this.currentRoomID = currentRoomID;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "currentRoomID=" + currentRoomID +
+                ", playerInventory=" + playerInventory +
+                ", maxHP=" + maxHP +
+                ", attackDmg=" + attackDmg +
+                ", armor=" + armor +
+                ", weapon=" + weapon +
+                '}';
     }
 }

@@ -27,7 +27,7 @@ public abstract class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "ItemName";
+        return this.ItemName;
     }
 
 

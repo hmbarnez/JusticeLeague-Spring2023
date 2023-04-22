@@ -27,7 +27,7 @@ public class Game {
                 printUserOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
                 //displays user options and gets user input
-                System.out.println("_________________________");
+                System.out.println("_____________________");
                 switch (userInput) {
                     case 1 -> {
                         moveMenu();
@@ -42,6 +42,9 @@ public class Game {
                             roomInventoryMenu();
                     case 4 -> saveGame();
                     case 5 -> System.exit(0);
+                    case 55 -> {
+                        System.out.println(player);
+                    }
                     default -> printErrorMessage();
                 }
             }catch (NumberFormatException e){
@@ -64,18 +67,10 @@ public class Game {
             //Scanner scan = new Scanner(System.in);
             try{
                 int input = Integer.parseInt(scan.nextLine());
-//                if(input == 1){
-//                    System.out.println("test");
-//                    newGame();
-//                    break;
-//                } else if (input == 2) {
-//                    System.out.println("load game");
-//                }
                 switch (input) {
                     case 1 -> {
                         System.out.println("test");
                         newGame();
-                        break;
                     }
                     case 2 -> loadGame();
                     default -> System.err.println("That input is not valid!");
@@ -128,7 +123,8 @@ public class Game {
 
     //inventory menu
     public static void viewPlayerInventoryMenu(){
-        System.out.println("Choose one of the following: ");
+        System.out.println("0. Exit");
+        System.out.println("or Choose Corresponding Item # to interact with: ");
         Scanner scan = new Scanner(System.in);
         //viewPlayerInventory returns true if there is something in the ArrayList
         //if playerInventory ArrayList is empty, the while loop is skipped
@@ -136,25 +132,29 @@ public class Game {
         while (exitItemMenu){
             try{
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
+                if(itemChoiceId < 0 || itemChoiceId > player.getPlayerInventory().size()){
+                    printErrorMessage();
+                    break;
+                }
                 System.out.println("_________________________");
-                System.out.println("Need to change but this prompt. Choose what to do with this item: ");
+                System.out.println("Choose what to do with this item: ");
                 printSelectedItemOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
 
                 switch (userInput) {
                     case 1 -> {
                         player.dropItem(itemChoiceId);
-                        exitItemMenu = true;
+                        exitItemMenu = false;
                     }
                     case 2 -> {
                         player.equipItem(itemChoiceId);
-                        exitItemMenu = true;
+                        exitItemMenu = false;
                     }
                     case 3 -> {
                         player.useItem(itemChoiceId);
-                        exitItemMenu = true;
+                        exitItemMenu = false;
                     }
-                    case 4 -> exitItemMenu = true;
+                    case 4 -> exitItemMenu = false;
                     default -> printErrorMessage();
                 }
 
@@ -170,20 +170,16 @@ public class Game {
     //if playerInventory ArrayList is empty, the while loop is skipped
     public static void roomInventoryMenu(){
         Scanner scan = new Scanner(System.in);
+        //printRoomItemOptions();
         boolean exitRoomInventory = player.viewRoomInventory();
         while(exitRoomInventory){
-            printRoomItemOptions();
             try {
+                printRoomItemOptions();
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
-                switch (itemChoiceId){
-                    case 0:
-                        exitRoomInventory = true;
-                        break;
-                    case 1:
-                        player.pickupItem(itemChoiceId);
-                        break;
-                    default:
-                        printErrorMessage();
+                switch (itemChoiceId) {
+                    case 0 -> exitRoomInventory = false;
+                    case 1 -> player.pickupItem(itemChoiceId);
+                    default -> printErrorMessage();
                 }
             }catch (NumberFormatException e){
                 System.out.println("ROOMINVMENU_ERROR");
@@ -204,10 +200,15 @@ public class Game {
         //TODO save method
     }
 
+
+
+
+
+
     // methods to remove some print statements from main method
     //basically a view.java for now
     public static void printUserOptions(){
-        System.out.println("_____________________");
+        System.out.println("__________________________________________________");
         System.out.println("What do you want to do next?");
         System.out.println("1. Move");
         System.out.println("2. Inventory");
@@ -230,10 +231,12 @@ public class Game {
         System.out.println("4. Exit");
     }
     public static void printRoomItemOptions(){
-//        System.out.println("1. Pickup");
-//        System.out.println("2. Exit");
-        System.out.println("0. Drop");
+        //System.out.println("1. Pickup Item");
+        System.out.println("_____________________");
+        System.out.println("0. Exit");
         System.out.println("or Choose Corresponding Item # to pickup: ");
+
+
     }
     public static void printErrorMessage(){
         System.err.println("Whoops! Your input was invalid. Try again!");

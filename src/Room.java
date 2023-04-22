@@ -28,7 +28,7 @@ public class Room implements Serializable {
         this.isLocked = isLocked;
     }
 
-    //add item method
+    //add item
     public void addItem(Item item){
         this.roomInventory.add(item);
     }

@@ -85,8 +85,9 @@ public class Map implements Serializable {
                 }
                 String roomName = roomArray[9];
                 String roomDescription = roomArray[10];
-
-                roomArrayList.add( new Room(roomId,directions,isVisited,tempMons,tempPuzz,tempItems,roomName,roomDescription));
+                boolean isLocked = Boolean.parseBoolean(roomArray[11]);
+                //int keyToUnLockId = Integer.parseInt(roomArray[12]);
+                roomArrayList.add( new Room(roomId,directions,isVisited,tempMons,tempPuzz,tempItems,roomName,roomDescription,isLocked));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

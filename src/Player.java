@@ -40,13 +40,23 @@ public class Player implements Serializable {
        }
        else{
            //updates room
+           //TODO Passive key check
+//           if(rooms.get(currentRoom.roomDirections[direction]).isLocked){
+//               //add isLocked to room and update map class
+//               if (playerInventory.c)
+//           }
            this.setCurrentRoomID(currentRoom.roomDirections[direction]);
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
            System.out.println("Entering: " + currentRoom.getRoomName());
            System.out.println(currentRoom.getRoomDescription());
 
            //TODO Check for puzzle
-
+           if((currentRoom.getPuzzle().getPuzzleId() != 0) && !(currentRoom.getPuzzle().isSolved())){
+               currentRoom.getPuzzle().solvePuzzle();
+               if(currentRoom.getPuzzle().isSolved()){
+                   //currentRoom.getRoomMonster().setIsAlive()
+               }
+           }
            //TODO Check for monster
 
 
@@ -54,6 +64,7 @@ public class Player implements Serializable {
            if (currentRoom.isVisited()){
                System.out.println("This room is familiar...");
            }
+
            //update the isVisited
            currentRoom.setVisited(true);
        }
@@ -133,6 +144,8 @@ public class Player implements Serializable {
                 this.weapon = (Weapon) item;
                 this.attackDmg += this.weapon.getWeaponDmg();
             }
+        }else{
+            System.out.println("You can't equip that item!");
         }
     }
 
@@ -152,7 +165,9 @@ public class Player implements Serializable {
             this.playerInventory.remove(itemID - 1);
         }else if(item instanceof BossKey){
             BossKey bossKey = (BossKey) item;
+
             this.rooms.get(bossKey.getRoomId()-1).setMonster(MONSTERSLIST.get(bossKey.getBossID()-1)); // figure out what to do with this
+
         }else{
             System.out.println("You can't use this item!");
         }

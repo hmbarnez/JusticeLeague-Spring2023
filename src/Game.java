@@ -96,7 +96,7 @@ public class Game {
 
     }
 
-    //move menu
+    //move menu not used
     public static void moveMenu(){
 
         boolean exitMoveMenu = false;

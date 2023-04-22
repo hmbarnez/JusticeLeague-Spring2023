@@ -53,7 +53,7 @@ public class Room implements Serializable {
         return roomMonster;
     }
 
-    public Puzzle getRoomPuzzle() {
+    public Puzzle getPuzzle() {
         return roomPuzzle;
     }
 
@@ -76,6 +76,7 @@ public class Room implements Serializable {
     public void setMonster(Monster monster) {
         this.roomMonster =  monster;
     }
+
 
     //add toString
 

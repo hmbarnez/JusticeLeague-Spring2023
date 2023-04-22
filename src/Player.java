@@ -20,55 +20,32 @@ public class Player implements Serializable {
         this.attackDmg = 10;
     }
 
-    //move rooms: associated with numbers
-/*
-    public void move(String direction){
+    //Author: Niecia
+    public void move(int direction){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
         Room nextRoom = null;
 
-        if ("n".equals(direction)) {
-            nextRoom
-        } else if ("s".equals(direction)) {
-            nextRoom
-        } else if ("e".equals(direction)) {
-            nextRoom
-        } else if ("w".equals(direction)) {
-            nextRoom
-        } else {
-            System.out.println("Wrong input");
-            return;
-        }
+       int index = direction-1;
+       if(currentRoom.roomDirections[index] == 0)
+       {
+           System.out.println("No room.");
+       }
+       else{
+           //updates room
+           setCurrentRoomID(currentRoom.roomDirections[index]);
+           currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
+       }
+        System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
-        if(nextRoom == null){
-            System.out.println("No Room");
-            return;
-        }
-
-        //updates room id
-        this.setCurrentRoomID(nextRoom.getRoomId());
-        //prints the description of the room being moved to
-        System.out.println(nextRoom.getDescription() + " " + nextRoom.getRoomId());
 
         //check to see if the room has been visited
         if (nextRoom.isVisited()){
             System.out.println("This room is familiar...");
         }
-
         //update the isVisited
-        nextRoom.setVisited();
+        nextRoom.setVisited(true);
     }
-    */
-    //search room : inspect room:see and pick up item
-    public void exploreRoom(){
-        Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
-        if (currentRoom.getRoomInventory().isEmpty())
-        {
-            System.out.println("There is no item in this room.");
-        } else {
-            System.out.println("List of items in this room " + currentRoom.getRoomInventory());
-        }
 
-    }
 
 
     //Author: Harrison Barnes
@@ -168,5 +145,9 @@ public class Player implements Serializable {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    private void setCurrentRoomID(int currentRoomID) {
+        this.currentRoomID = currentRoomID;
     }
 }

@@ -1,3 +1,7 @@
+/**
+ * author : Niecia
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -27,21 +31,12 @@ public class Room implements Serializable {
         this.roomInventory.add(item);
     }
 
-    //TODO :
-    //remove item : Room
-   /* public void removeItem(Item item) {
-        int index = -1;
-        for (int i = 0; i < roomInventory.size(); i++) {
-            if (roomInventory.get(i).getName().equals(item.getName())) {
-                index = i;
-                break;
-            }
-        }
-        if (index != -1) {
-            roomInventory.remove(index);
-        }
-    }*/
-    //
+    //remove item
+    public void removeItem(int itemID)
+    {
+        this.roomInventory.remove(itemID-1) ;
+    }
+
     public int getRoomId() {
         return roomId;
     }

@@ -49,8 +49,10 @@ public class Player implements Serializable {
 //               //add isLocked to room and update map class
 //               if (playerInventory.c)
 //           }
-           this.setCurrentRoomID(currentRoom.roomDirections[direction]);
-           currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
+            previousRoomID = currentRoom.getRoomId(); // Adrian 
+            this.setCurrentRoomID(currentRoom.roomDirections[direction]);
+            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
+           
            System.out.println("Entering: " + currentRoom.getRoomName());
            System.out.println(currentRoom.getRoomDescription());
 
@@ -169,8 +171,8 @@ public class Player implements Serializable {
 
                     //    Room previousRoom = rooms.get(previousRoomID - 1); // get previous room
                     //    TODO - MOVE PLAYER TO PREVIOUS ROOM
-
-
+                       player.move(previousRoomID); // move player to previous room
+                        
 
                         player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
             //            Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
@@ -351,6 +353,11 @@ public class Player implements Serializable {
     //Getters
     public int getCurrentRoomID() {
         return currentRoomID;
+    }
+    // Author: Adrian Japa
+    public int getPreviousRoomID()
+    {
+        return this.previousRoomID;
     }
 
     public ArrayList<Room> getRooms() {

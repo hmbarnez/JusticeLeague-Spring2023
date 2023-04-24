@@ -1,9 +1,12 @@
 import java.io.Serializable;
+import java.util.Random;
 /*
  * Author: Adrian Japa
  * This class is in charge of creating the monsters that will be used in the game.
  */
 import java.util.Scanner;
+
+import javax.lang.model.util.ElementScanner14;
 
 
 public class Monster implements Serializable
@@ -59,8 +62,10 @@ public class Monster implements Serializable
     {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
+        int dropChance = random.nextInt(100);
 
-
+        Item bluePowerAide = player.getItemsArrayList().get(4);  
+        Item appleJuice = player.getItemsArrayList().get(3);
 
         boolean combatStatus = true;
 
@@ -95,35 +100,56 @@ public class Monster implements Serializable
                     healthPoints -= playerDamage;
 
                     // check if monster is defeated
-                    if (healthPoints <= 0) {
-                        System.out.println("You defeated the " + monsterName + "!");
-
-                      ///////// 
-                        // 33% chance of monster dropping item
-                        if (random.nextInt(3) == 0) {
-                            String itemName = "Consumable Item"; // change this to actual item name
-                            Item item = new Item(itemName, "Description"); // create item object
-                            currentRoom.addItem(item); // add item to room inventory
-                            System.out.println("The " + monsterName + " dropped a " + itemName + "!");
+                    if (healthPoints <= 0) 
+                      {  System.out.println("You defeated the " + monsterName + "!");
+                        ////////////////DROP CHANCE
+                        if (dropChance < 33) 
+                        {
+                            System.out.println("The " + monsterName + " dropped a " + bluePowerAide.getItemName() + "!");
+                            currentRoom.addItem(bluePowerAide);
                         }
+                        else if(dropChance < 66)
+                        {
+                            System.out.println("The " + monsterName + " dropped a " + appleJuice.getItemName() + "!");
+                            currentRoom.addItem(appleJuice);
+                        }
+                        else
+                        {
+                            System.out.println("The " + monsterName + " dropped nothing!");
+                        }
+                    }
 
                         // remove monster from room
                         currentRoom.removeMonster();
                         combatStatus = false; // exit combat state
-                    }
+                //    }
 
                     // monster attacks back
                     int monsterDamage = attackDmg;
                     System.out.println("The " + monsterName + " dealt " + monsterDamage + " damage!");
-                    player.reduceHealth(monsterDamage);
+                //    player.reduceHealth(monsterDamage);
+                    player.setCurrentHP(player.getCurrentHP()- monsterDamage);
 
                     // check if the player has died
-                    if (player.getCurrentHP() <= 0) {
+                    if (player.getCurrentHP() <= 0) 
+                    {
                         System.out.println("You died!");
+
+                    //    Room previousRoom = rooms.get(previousRoomID - 1); // get previous room
+                    //    TODO - MOVE PLAYER TO PREVIOUS ROOM
+
+
+
                         player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
-                        Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
-                        currentRoom.addItem(item); // add item to room inventory
+            //            Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
+            //            currentRoom.addItem(item); // add item to room inventory
+
+                //      player.setcurrentRoom(previousRoomID); // set player to previous room
+                //      currentRoom.addItem(bluePowerAide);
+                //        player.playerInventory.add(bluePowerAide);
+            
                         combatStatus = false; // exit combat state
+                        
                     }
                     break;
                 case 2:
@@ -145,7 +171,7 @@ public class Monster implements Serializable
         }
 
 
-    }
+    
 
 
 

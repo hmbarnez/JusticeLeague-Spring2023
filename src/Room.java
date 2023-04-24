@@ -99,4 +99,9 @@ public class Room implements Serializable {
                 ", roomName='" + roomName + '\'' +
                 '}';
     }
+    //Author: Adrian
+    public void removeMonster() 
+    {   
+        this.roomMonster = null;
+    }
 }

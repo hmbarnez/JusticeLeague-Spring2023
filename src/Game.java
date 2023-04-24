@@ -217,10 +217,12 @@ public class Game {
 
     public static void loadGame(){
         //TODO load method also change return type to: Player
+        System.out.println("TO BE IMPLEMENTED");
     }
 
     public static void saveGame(){
         //TODO save method
+        System.out.println("TO BE IMPLEMENTED");
     }
 
 
@@ -240,8 +242,9 @@ public class Game {
         System.out.println("4. West");
         System.out.println("5. Inventory");
         System.out.println("6. Search Room");
-        System.out.println("7. Save Game");
+        System.out.println("\n7. Save Game");
         System.out.println("8. Exit Game");
+        
     }
     public static void printMoveDirections(){
         System.out.println("1. North");

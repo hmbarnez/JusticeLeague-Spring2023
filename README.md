@@ -5,7 +5,7 @@ each attribute seperated by regex "~"
 
 finalProjectMap.txt
 
-int roomId, int[] roomDirections, boolean isVisited, Monster roomMonster, Puzzle roomPuzzle, ArrayList<Item> roomInventory, String roomName, String roomDescription
+int roomId, int[] roomDirections, boolean isVisited, Monster roomMonster, Puzzle roomPuzzle, ArrayList<Item> roomInventory, String roomName, String roomDescription, boolean isLocked, int keyToUnlockID
   
 --------------------------------------------------------------------------
 itemsInformation.txt

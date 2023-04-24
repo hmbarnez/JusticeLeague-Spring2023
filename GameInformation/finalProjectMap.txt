@@ -9,12 +9,12 @@
 9~8~0~0~0~false~1~0~10,5~Master Bathroom~It is nasty and toilet debris is all over the floor. There seems to be a toilet doing some thing in the room, maybe it’s the reason for the room's condition.~false~1
 10~5~0~14~0~false~0~0~0~Stairs~The carpet is rotting with ants and cock roaches infesting over the failing wood. Probably a good idea to get out of there as fast as possible.~false~1
 11~0~12~0~0~false~0~0~5~Pantry~There is food that looks alive and waiting on your very move, so be cautious!~false~1
-12~0~14~13~1~false~0~0~12,4~Kitchen~The cabinet doors are barely hanging over, while the kitchen appliances are functioning like crazy.~false~1
+12~0~14~13~11~false~0~0~12,4~Kitchen~The cabinet doors are barely hanging over, while the kitchen appliances are functioning like crazy.~false~1
 13~12~0~0~0~false~0~0~6~Garage~With the cold temperature and the chipped floor, this place isn’t what it used to be.~false~1
-14~10~15~0~2~false~6~0~0~Foyer~With the chandelier lights constantly flickering, there is a sort of loneliness in this foyer. Ironic since it's supposed to be inviting.~false~1
-15~0~17~16~4~false~3~0~4~Living Room~The sofa rejects you from you try to seat on team, not to mention the floor is lava. Also, that tv doesn’t look right.~false~1
+14~10~15~0~12~false~6~0~0~Foyer~With the chandelier lights constantly flickering, there is a sort of loneliness in this foyer. Ironic since it's supposed to be inviting.~false~1
+15~0~17~16~14~false~3~0~4~Living Room~The sofa rejects you from you try to seat on team, not to mention the floor is lava. Also, that tv doesn’t look right.~false~1
 16~15~0~0~0~false~0~0~8~Laundry Room~The washer and dryer are shaking violently with the cabinets shut ting and open ing their doors non-stop.~false~1
-17~18~19~0~5~false~7~6~4,5~Guest Bathroom~A step-up from the master bathroom which isn’t saying much. Although the floor is wet as the sink is running.~false~1
+17~18~19~0~15~false~7~6~4,5~Guest Bathroom~A step-up from the master bathroom which isn’t saying much. Although the floor is wet as the sink is running.~false~1
 18~0~0~17~0~false~2~0~0~Towel Closet~In the closet of used towel, but there isn’t exactly any other alternative to dry the floor.~false~1
-19~0~20~0~7~false~0~0~13~Guest Bedroom~With no working lights and a punched hole in the wall some thing going on here.~false~1
+19~0~20~0~17~false~0~0~13~Guest Bedroom~With no working lights and a punched hole in the wall some thing going on here.~false~1
 20~0~0~0~19~false~0~0~9~Guest Closet~Now a regular old closet, an opportunity to contemplate on what to do next.~false~1

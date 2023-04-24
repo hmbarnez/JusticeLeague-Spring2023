@@ -156,6 +156,8 @@ public class Game {
                     exitItemMenu = false;
                     break;
                 }
+                System.out.println(player.getPlayerInventory().get(itemChoiceId-1)); //Author Brian
+                System.out.println(player.getPlayerInventory().get(itemChoiceId-1).getItemDesc()); //Author Brian
                 System.out.println("__________________________________________________");
                 System.out.println("Choose what to do with this item: ");
                 printSelectedItemOptions();

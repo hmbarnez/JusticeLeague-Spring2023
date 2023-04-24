@@ -249,6 +249,7 @@ public class Game {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Game loaded!");
         return (Player) temp;
     }
 

@@ -34,8 +34,10 @@ public class Player implements Serializable {
     }
 
     //Author: Niecia
-    public void move(int direction){
+    public void move(int direction)
+    {
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
+        previousRoomID = currentRoom.getRoomId();
         //Room nextRoom = null;
         direction -= 1;
        if(currentRoom.roomDirections[direction] == 0)
@@ -71,7 +73,7 @@ public class Player implements Serializable {
            
            if((currentRoom.getRoomMonster().getMonsterId() != 0) && (currentRoom.getRoomMonster().isAlive()))
            {
-                System.out.println("\n------------FIGHT-------------------");
+                System.out.println("\n------------ FIGHT -------------------");
                 Combat();
 
            }
@@ -109,19 +111,20 @@ public class Player implements Serializable {
         while(combatStatus)
         {
             //Print monster information
-            System.out.println("You have encountered a " + monster.getMonsterName() + "!");
-            System.out.println("Monster Health: " + monster.getHealthPoints());
+            System.out.println("\nYou have encountered a " + monster.getMonsterName() + "!");
+            System.out.println("\tMonster Health: " + monster.getHealthPoints());
            
             //Print player information
-            System.out.println("Player Health: " + this.getCurrentHP());
-            System.out.println("Player Attack: " + this.getAttackDmg());
+            System.out.println("\tPlayer Health: " + this.getCurrentHP());
+            System.out.println("\tPlayer Attack: " + this.getAttackDmg());
            
-            System.out.println("\nWhat would you like to do?");
+            System.out.println("\n\tWhat would you like to do?");
 
             //Print user input options
-            System.out.println("1. Attack");
-            System.out.println("2. Run");
-            System.out.println("3. Use Item");
+            System.out.println("\t1. Attack");
+            System.out.println("\t2. Run");
+            System.out.println("\t3. Use Item");
+            System.out.println("\n------------ FIGHT -------------------");
 
             //Get user input
             int userInput = input.nextInt();
@@ -166,6 +169,8 @@ public class Player implements Serializable {
                         // remove monster from room
                         //currentRoom.setRoomMonster(null);
                         //currentRoom.getRoomMonster().setIsAlive(false);
+                        currentRoom.getRoomMonster().setIsAlive(false);
+                        combatStatus = false; // exit combat state
 
                 //    }
 
@@ -190,17 +195,18 @@ public class Player implements Serializable {
             //            currentRoom.addItem(item); // add item to room inventory
 
                 //      player.setcurrentRoom(previousRoomID); // set player to previous room
-                //      currentRoom.addItem(bluePowerAide);
+                      currentRoom.addItem(bluePowerAide);
                 //        player.playerInventory.add(bluePowerAide);
-            
+                        System.out.println("You are now in the " + this.rooms.get(this.getCurrentRoomID() - 1).getRoomName() + "!");
                         combatStatus = false; // exit combat state
                         
                     }
                     break;
                 case 2:
-                     System.out.println("You run away from the " + monster.getMonsterName() + "!");
-                     this.setCurrentRoomID(previousRoomID);
-                     System.out.println("You are now in the " + this.rooms.get(this.getCurrentRoomID() - 1).getRoomName() + "!");
+                        System.out.println("You run away from the " + monster.getMonsterName() + "!");
+                        this.setCurrentRoomID(previousRoomID);
+            //             System.out.println("You are now in the " + this.rooms.get(this.getCurrentRoomID() - 1).getRoomName() + "!");
+                        System.out.println("and have returned to the previous room!");
                     combatStatus = false; // exit combat state
                     break;
                 case 3:
@@ -428,13 +434,12 @@ public class Player implements Serializable {
     @Override
     public String toString() {
         return "Player{" +
-                "currentRoomID=" + currentRoomID +
-                ", playerInventory=" + playerInventory +
-                ", maxHP=" + maxHP +
-                ", currentHP=" + currentHP +
-                ", attackDmg=" + attackDmg +
-                ", armor=" + armor +
-                ", weapon=" + weapon +
+                "currentRoomID = " + currentRoomID +
+                "\nPlayer Inventory = " + playerInventory +
+                "\nHP = " + currentHP + "/" + maxHP +
+                "\tattackDmg = " + attackDmg +
+                "\nArmor = " + armor +
+                "\nweapon = " + weapon +
                 '}';
     }
 

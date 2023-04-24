@@ -98,13 +98,13 @@ public class Room implements Serializable {
     //add toString
     @Override
     public String toString() {
-        return "Room{" +
-                "roomId=" + roomId +
-                ", roomMonster=" + roomMonster +
-                ", roomPuzzle=" + roomPuzzle +
-                ", roomInventory=" + roomInventory +
-                ", roomName='" + roomName + '\'' +
-                ". isLocked=" + isLocked +
+        return "Room {" +
+                "ID = " + roomId +
+                "\nRoom Monster = " + roomMonster +
+                "\nRoom Puzzle = " + roomPuzzle +
+                "\nRoom Inventory = " + roomInventory +
+                "\nRoom Name = '" + roomName + '\'' +
+                "\nDoor locked? = " + isLocked +
                 '}';
     }
     //Author: Adrian

@@ -1,6 +1,6 @@
-import java.io.Serializable;
 
-public class PassiveKey extends Item implements Serializable {
+
+public class PassiveKey extends Item  {
         private int roomToUnlock;
         
         public PassiveKey(int ItemID, String ItemName, String ItemDesc, int roomToUnlock) {
@@ -10,5 +10,9 @@ public class PassiveKey extends Item implements Serializable {
 
         public int getRoomToUnlock(){
             return this.roomToUnlock;
+        }
+
+        public boolean doesPlayerHaveKey() {
+            return false;
         }
 }

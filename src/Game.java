@@ -10,6 +10,7 @@ public class Game {
         //Main Menu
         mainMenuIntro();
     }
+    
     /*Author: Harrison Barnes
      * Game class takes in user input to control the user's character.
      * The newGame method is where the main input loop is found.
@@ -61,6 +62,8 @@ public class Game {
                         //used for testing and seeing player's stats
                         System.out.println(player.getCurrentRoom());
                     }
+
+
                     default -> printErrorMessage();
                 }
             }catch (NumberFormatException e){

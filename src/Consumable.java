@@ -1,6 +1,5 @@
-import java.io.Serializable;
 
-public class Consumable extends Item implements Serializable {
+public class Consumable extends Item {
     private int hitPointsAdded;
 
     public Consumable(int ItemID, String ItemName, String ItemDesc, int hitPointsAdded) {

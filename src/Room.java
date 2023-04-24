@@ -80,7 +80,7 @@ public class Room implements Serializable {
     public int getKeyToUnlock() {
         return keyToUnlock;
     }
-    
+
     public void setVisited(boolean visited) {
         isVisited = visited;
     }
@@ -104,6 +104,7 @@ public class Room implements Serializable {
                 ", roomPuzzle=" + roomPuzzle +
                 ", roomInventory=" + roomInventory +
                 ", roomName='" + roomName + '\'' +
+                ". isLocked=" + isLocked +
                 '}';
     }
     //Author: Adrian

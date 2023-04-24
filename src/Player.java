@@ -65,8 +65,7 @@ public class Player implements Serializable {
            if((currentRoom.getPuzzle().getPuzzleId() != 0) && !(currentRoom.getPuzzle().isSolved())){
                currentRoom.getPuzzle().solvePuzzle();
                if(currentRoom.getPuzzle().isSolved()){
-                   //currentRoom.getRoomMonster().setIsAlive()
-                
+                   currentRoom.getRoomMonster().setIsAlive(false);
                }
            }
            
@@ -142,7 +141,7 @@ public class Player implements Serializable {
                       {  
                         System.out.println("You defeated the " + monster.getMonsterName() + "!");
                         monster.setIsAlive(false);
-                        
+                        combatStatus = false; // exit combat state
 
                         ////////////////DROP CHANCE
                         if (dropChance < 33) 
@@ -159,13 +158,15 @@ public class Player implements Serializable {
                         {
                             System.out.println("The " + monster.getMonsterName() + " dropped nothing!");
                         }
+
                         return;
+
                     }
 
                         // remove monster from room
                         //currentRoom.setRoomMonster(null);
-                        currentRoom.getRoomMonster().setIsAlive(false);
-                        combatStatus = false; // exit combat state
+                        //currentRoom.getRoomMonster().setIsAlive(false);
+
                 //    }
 
                     // monster attacks back
@@ -323,6 +324,7 @@ public class Player implements Serializable {
             BossKey bossKey = (BossKey) item;
 
             this.rooms.get(bossKey.getRoomId()-1).setMonster(MONSTERSLIST.get(bossKey.getBossID()-1)); // figure out what to do with this
+            this.rooms.get(bossKey.getRoomId()-1).getRoomMonster().setIsAlive(true);
 
         }else{
             System.out.println("You can't use this item!");
@@ -429,6 +431,7 @@ public class Player implements Serializable {
                 "currentRoomID=" + currentRoomID +
                 ", playerInventory=" + playerInventory +
                 ", maxHP=" + maxHP +
+                ", currentHP=" + currentHP +
                 ", attackDmg=" + attackDmg +
                 ", armor=" + armor +
                 ", weapon=" + weapon +

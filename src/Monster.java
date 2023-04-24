@@ -1,9 +1,12 @@
 import java.io.Serializable;
+import java.util.Random;
 /*
  * Author: Adrian Japa
  * This class is in charge of creating the monsters that will be used in the game.
  */
 import java.util.Scanner;
+
+import javax.lang.model.util.ElementScanner14;
 
 
 public class Monster implements Serializable
@@ -52,20 +55,17 @@ public class Monster implements Serializable
 //        }
 //    }
     
-    //Author: Adrian Japa
-    //used for engaging in combat. 
-    // WORK IN PROGRESS
-    public void combat(Player player, Room currentRoom)
+    
+
+    // getters and setters
+    public boolean isAlive() 
     {
-        Scanner input = new Scanner(System.in);
-        Random random = new Random();
+        return isAlive;
+    }
 
-
-
-        boolean combatStatus = true;
-
-        //while loop for combat
-        while(combatStatus)
+    public void setIsAlive()
+    {
+        if(this.healthPoints <= 0)
         {
             //Print monster information
             System.out.println("You have encountered a " + this.monsterName + "!");
@@ -121,10 +121,8 @@ public class Monster implements Serializable
                     if (player.getCurrentHP() <= 0) {
                         System.out.println("You died!");
                         player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
-                        //add item from
-                       // Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
-                        //currentRoom.addItem(item); // add item to room inventory
-                        
+                        Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
+                        currentRoom.addItem(item); // add item to room inventory
                         combatStatus = false; // exit combat state
                     }
                     break;
@@ -143,22 +141,26 @@ public class Monster implements Serializable
             }
             }
 
-
-        }
-
-
-
-
-
-    // getters and setters
-
+    public String getMonsterName()
+    {
+        return monsterName;
+    }
 
     public int getMonsterId() {
         return monsterId;
     }
 
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
     public int getHealthRegen() {
         return healthRegen;
+    }
+
+    public int setHealthPoints(int healthPoints) 
+    {
+        return this.healthPoints = healthPoints;
     }
 
     public void setHealthRegen(int healthRegen) {
@@ -176,4 +178,6 @@ public class Monster implements Serializable
                 ", isAlive=" + isAlive +
                 '}';
     }
+  
+   
 }

@@ -107,6 +107,9 @@ public class Room implements Serializable {
                 ". isLocked=" + isLocked +
                 '}';
     }
-
-
+    //Author: Adrian
+    public void removeMonster() 
+    {   
+        this.roomMonster = null;
+    }
 }

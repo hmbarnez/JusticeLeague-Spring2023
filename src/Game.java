@@ -279,7 +279,7 @@ public class Game {
         System.out.println("4. West");
         System.out.println("5. Inventory");
         System.out.println("6. Search Room");
-        System.out.println("7. Save Game");
+        System.out.println("\n7. Save Game");
         System.out.println("8. Exit Game");
         System.out.println("__________________________________________________");
     }

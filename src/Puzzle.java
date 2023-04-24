@@ -39,6 +39,17 @@ public class Puzzle implements Serializable {
 
     public Puzzle(){
         this.puzzleId = 0;
+        this.puzzleAttempts = 0;
+        this.puzzleName = "";
+        this.puzzleDescription = "";
+        this.puzzlePrompt = "";
+        this.q1 = "";
+        this.a1 = "";
+        this.q2 = "";
+        this.a2 = "";
+        this.q3 = "";
+        this.a3 = "";
+        this.isSolved = false;
     }
 
     public void solvePuzzle() {

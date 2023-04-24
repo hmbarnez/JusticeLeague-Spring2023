@@ -1,6 +1,8 @@
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Player implements Serializable {
 
@@ -57,10 +59,16 @@ public class Player implements Serializable {
                currentRoom.getPuzzle().solvePuzzle();
                if(currentRoom.getPuzzle().isSolved()){
                    //currentRoom.getRoomMonster().setIsAlive()
+                
                }
            }
            //TODO Check for monster
+           if((currentRoom.getRoomMonster().getMonsterId() != 0) && !(currentRoom.getRoomMonster().isAlive()))
+           {
+                Combat(null, currentRoom);
 
+           }
+           
 
            //check to see if the room has been visited
            if (currentRoom.isVisited()){
@@ -74,7 +82,125 @@ public class Player implements Serializable {
 
     }
 
+    //Author: Adrian Japa
+    //used for engaging in combat. 
+    // WORK IN PROGRESS
+    public void Combat(Player player, Room currentRoom)
+    {
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int dropChance = random.nextInt(100);
+        Monster monster = this.rooms.get(this.getCurrentRoomID() - 1).getRoomMonster();
 
+        Item bluePowerAide = player.getItemsArrayList().get(4);  
+        Item appleJuice = player.getItemsArrayList().get(3);
+
+        boolean combatStatus = true;
+
+        //while loop for combat
+        while(combatStatus)
+        {
+            //Print monster information
+            System.out.println("You have encountered a " + monster.getMonsterName() + "!");
+            System.out.println("Monster Health: " + monster.getHealthPoints());
+           
+            //Print player information
+            System.out.println("Player Health: " + player.getCurrentHP());
+            System.out.println("Player Attack: " + player.getAttackDmg());
+           
+            System.out.println("\nWhat would you like to do?");
+
+            //Print user input options
+            System.out.println("1. Attack");
+            System.out.println("2. Run");
+            System.out.println("3. Use Item");
+
+            //Get user input
+            int userInput = input.nextInt();
+            
+            //Switch statement for user input
+            switch(userInput)
+            {
+                case 1:
+                    // calculate player damage and reduce monster health
+                    int playerDamage = player.getAttackDmg();
+                    System.out.println("You dealt " + playerDamage + " damage!");
+                    monster.setHealthPoints(monster.getHealthPoints() - playerDamage);
+                    
+
+                    // check if monster is defeated
+                    if (monster.getHealthPoints() <= 0) 
+                      {  
+                        System.out.println("You defeated the " + monster.getMonsterName() + "!");
+                        monster.setIsAlive();
+
+                        ////////////////DROP CHANCE
+                        if (dropChance < 33) 
+                        {
+                            System.out.println("The " + monster.getMonsterName() + " dropped a " + bluePowerAide.getItemName() + "!");
+                            currentRoom.addItem(bluePowerAide);
+                        }
+                        else if(dropChance < 66)
+                        {
+                            System.out.println("The " + monster.getMonsterName() + " dropped a " + appleJuice.getItemName() + "!");
+                            currentRoom.addItem(appleJuice);
+                        }
+                        else
+                        {
+                            System.out.println("The " + monster.getMonsterName() + " dropped nothing!");
+                        }
+                    }
+
+                        // remove monster from room
+                        currentRoom.removeMonster();
+                        combatStatus = false; // exit combat state
+                //    }
+
+                    // monster attacks back
+                    int monsterDamage = attackDmg;
+                    System.out.println("The " + monster.getMonsterName() + " dealt " + monsterDamage + " damage!");
+                //    player.reduceHealth(monsterDamage);
+                    player.setCurrentHP(player.getCurrentHP()- monsterDamage);
+
+                    // check if the player has died
+                    if (player.getCurrentHP() <= 0) 
+                    {
+                        System.out.println("You died!");
+
+                    //    Room previousRoom = rooms.get(previousRoomID - 1); // get previous room
+                    //    TODO - MOVE PLAYER TO PREVIOUS ROOM
+
+
+
+                        player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
+            //            Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
+            //            currentRoom.addItem(item); // add item to room inventory
+
+                //      player.setcurrentRoom(previousRoomID); // set player to previous room
+                //      currentRoom.addItem(bluePowerAide);
+                //        player.playerInventory.add(bluePowerAide);
+            
+                        combatStatus = false; // exit combat state
+                        
+                    }
+                    break;
+                case 2:
+                     System.out.println("You run away from the " + monster.getMonsterName() + "!");
+                    combatStatus = false; // exit combat state
+                    break;
+                case 3:
+                    System.out.println("Which item would you like to use?");
+                    player.getPlayerInventory();
+                    int itemChoice = input.nextInt();
+                    player.useItem(itemChoice);
+                    break;
+                default:
+                    System.out.println("Invalid command!");
+            }
+            }
+
+
+        }
 
     //Author: Harrison Barnes and Niecia Say
     //methods for game class to view player and room inventory in numbered order

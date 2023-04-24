@@ -141,7 +141,8 @@ public class Player implements Serializable {
                     if (monster.getHealthPoints() <= 0) 
                       {  
                         System.out.println("You defeated the " + monster.getMonsterName() + "!");
-                        monster.setIsAlive();
+                        monster.setIsAlive(false);
+                        
 
                         ////////////////DROP CHANCE
                         if (dropChance < 33) 
@@ -163,7 +164,7 @@ public class Player implements Serializable {
 
                         // remove monster from room
                         //currentRoom.setRoomMonster(null);
-                        currentRoom.getRoomMonster().setIsAlive();
+                        currentRoom.getRoomMonster().setIsAlive(false);
                         combatStatus = false; // exit combat state
                 //    }
 

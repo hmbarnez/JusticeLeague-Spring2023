@@ -12,6 +12,7 @@ public class Player implements Serializable {
     private Armor armor;
     private Weapon weapon;
     private int currentHP;
+    private int previousRoomID;
 
     private final ArrayList<Monster> MONSTERSLIST;
     private final ArrayList<Item> ITEMSLIST;
@@ -27,6 +28,7 @@ public class Player implements Serializable {
         this.currentHP = maxHP;
         this.MONSTERSLIST = map.getMonstersArrayList();
         this.ITEMSLIST = map.getItemsArrayList();
+        this.previousRoomID = 0;
     }
 
     //Author: Niecia
@@ -253,6 +255,11 @@ public class Player implements Serializable {
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public ArrayList<Item> getItemsArrayList()
+    {
+        return ITEMSLIST;
+    } 
 
     public int setCurrentHP(int currentHP)
     {

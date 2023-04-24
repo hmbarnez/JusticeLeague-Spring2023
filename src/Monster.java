@@ -121,8 +121,10 @@ public class Monster implements Serializable
                     if (player.getCurrentHP() <= 0) {
                         System.out.println("You died!");
                         player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
-                        Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
-                        currentRoom.addItem(item); // add item to room inventory
+                        //add item from
+                       // Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
+                        //currentRoom.addItem(item); // add item to room inventory
+                        
                         combatStatus = false; // exit combat state
                     }
                     break;

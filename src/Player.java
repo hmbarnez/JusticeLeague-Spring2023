@@ -40,11 +40,19 @@ public class Player implements Serializable {
        }
        else{
            //updates room
-           //TODO Passive key check
-//           if(rooms.get(currentRoom.roomDirections[direction]).isLocked){
-//               //add isLocked to room and update map class
-//               if (playerInventory.c)
-//           }
+           // TODO Passive key check
+         //   System.out.println(rooms.get(currentRoom.roomDirections[direction]-1));
+           if(rooms.get(currentRoom.roomDirections[direction]-1).isLocked()){
+            System.out.println("Test");
+               if(this.playerInventory.contains(ITEMSLIST.get(rooms.get(currentRoom.roomDirections[direction]-1).getKeyToUnlock()-1))){
+                    rooms.get(currentRoom.roomDirections[direction]).setLocked(false);
+                    System.out.println("Unlocking room ...");
+                }
+                else{
+                     System.out.println("You don't have the key to unlock this room!");
+                    return;
+                }
+            }
            this.setCurrentRoomID(currentRoom.roomDirections[direction]);
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
            System.out.println("Entering: " + currentRoom.getRoomName());
@@ -71,7 +79,6 @@ public class Player implements Serializable {
         //System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
     }
-
 
 
     //Author: Harrison Barnes and Niecia Say
@@ -276,5 +283,9 @@ public class Player implements Serializable {
                 ", armor=" + armor +
                 ", weapon=" + weapon +
                 '}';
+    }
+
+    public boolean checkInventory(String string) {
+        return false;
     }
 }

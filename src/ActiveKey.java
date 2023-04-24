@@ -1,6 +1,5 @@
-import java.io.Serializable;
 
-public class ActiveKey extends Item implements Serializable {
+public class ActiveKey extends Item {
     private int regenValue;
     
     public ActiveKey(int ItemID, String ItemName, String ItemDesc, int value) {

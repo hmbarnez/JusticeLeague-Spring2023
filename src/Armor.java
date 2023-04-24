@@ -1,6 +1,5 @@
-import java.io.Serializable;
 
-public class Armor extends Item implements Serializable {
+public class Armor extends Item  {
     private int armorPoints;
 
     public Armor(int ItemID, String ItemName, String ItemDesc, int armorPoints) {

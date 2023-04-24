@@ -1,6 +1,5 @@
-import java.io.Serializable;
 
-public class BossKey extends Item implements Serializable {
+public class BossKey extends Item  {
     private int roomID;
     private int bossID;
 

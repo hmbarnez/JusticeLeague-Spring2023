@@ -27,7 +27,7 @@ public class Game {
                 printUserOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
                 //displays user options and gets user input
-                System.out.println("_____________________");
+                System.out.println("__________________________________________________");
                 switch (userInput) {
                     case 1,2,3,4 -> {
                         player.move(userInput);
@@ -77,12 +77,13 @@ public class Game {
             System.out.println("Enter the corresponding number to choose an option: ");
             System.out.println("1. New Game");
             System.out.println("2. Load Game");
+            System.out.println("__________________________________________________");
             //Scanner scan = new Scanner(System.in);
             try{
                 int input = Integer.parseInt(scan.nextLine());
                 switch (input) {
                     case 1 -> {
-                        System.out.println("test");
+                        System.out.println("Game Intro here");
                         newGame();
                     }
                     case 2 -> loadGame();
@@ -136,12 +137,14 @@ public class Game {
 
     //inventory menu
     public static void viewPlayerInventoryMenu(){
-        System.out.println("0. Exit");
-        System.out.println("or Choose Corresponding Item # to interact with: ");
+        System.out.println("Choose Corresponding Item # to interact with (or 0 to exit): ");
         Scanner scan = new Scanner(System.in);
+        
         //viewPlayerInventory returns true if there is something in the ArrayList
         //if playerInventory ArrayList is empty, the while loop is skipped
+        
         boolean exitItemMenu = player.viewPlayerInventory();
+        System.out.println("__________________________________________________");
         while (exitItemMenu){
             try{
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
@@ -149,7 +152,11 @@ public class Game {
                     printErrorMessage();
                     break;
                 }
-                System.out.println("_________________________");
+                else if(itemChoiceId == 0){
+                    exitItemMenu = false;
+                    break;
+                }
+                System.out.println("__________________________________________________");
                 System.out.println("Choose what to do with this item: ");
                 printSelectedItemOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
@@ -158,14 +165,18 @@ public class Game {
                     case 1 -> {
                         player.dropItem(itemChoiceId);
                         exitItemMenu = false;
+                       System.out.println("Item Dropped");
+
                     }
                     case 2 -> {
                         player.equipItem(itemChoiceId);
                         exitItemMenu = false;
+                        System.out.println("Item Equipped");
                     }
                     case 3 -> {
                         player.useItem(itemChoiceId);
                         exitItemMenu = false;
+                        System.out.println("Item Used");
                     }
                     case 4 -> exitItemMenu = false;
                     default -> printErrorMessage();
@@ -242,6 +253,7 @@ public class Game {
         System.out.println("6. Search Room");
         System.out.println("7. Save Game");
         System.out.println("8. Exit Game");
+        System.out.println("__________________________________________________");
     }
     public static void printMoveDirections(){
         System.out.println("1. North");
@@ -256,13 +268,12 @@ public class Game {
         System.out.println("2. Equip");
         System.out.println("3. Use");
         System.out.println("4. Exit");
-    }
+        System.out.println("__________________________________________________");    }
     public static void printRoomItemOptions(){
         //System.out.println("1. Pickup Item");
-        System.out.println("_____________________");
-        System.out.println("0. Exit");
-        System.out.println("or Choose Corresponding Item # to pickup: ");
-
+        System.out.println("__________________________________________________");
+        System.out.println("Choose Corresponding Item # to pickup (or 0 to exit): ");
+        
 
     }
     public static void printErrorMessage(){

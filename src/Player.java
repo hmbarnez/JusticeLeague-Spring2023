@@ -44,11 +44,9 @@ public class Player implements Serializable {
        }
        else{
            //updates room
-<<<<<<< HEAD
            // TODO Passive key check
          //   System.out.println(rooms.get(currentRoom.roomDirections[direction]-1));
            if(rooms.get(currentRoom.roomDirections[direction]-1).isLocked()){
-            System.out.println("Test");
                if(this.playerInventory.contains(ITEMSLIST.get(rooms.get(currentRoom.roomDirections[direction]-1).getKeyToUnlock()-1))){
                     rooms.get(currentRoom.roomDirections[direction]).setLocked(false);
                     System.out.println("Unlocking room ...");
@@ -60,17 +58,6 @@ public class Player implements Serializable {
             }
            this.setCurrentRoomID(currentRoom.roomDirections[direction]);
            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
-=======
-           //TODO Passive key check
-//           if(rooms.get(currentRoom.roomDirections[direction]).isLocked){
-//               //add isLocked to room and update map class
-//               if (playerInventory.c)
-//           }
-            previousRoomID = currentRoom.getRoomId(); // Adrian 
-            this.setCurrentRoomID(currentRoom.roomDirections[direction]);
-            currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
-           
->>>>>>> 44749790a07cb02e548ef4604ee339112197a0ad
            System.out.println("Entering: " + currentRoom.getRoomName());
            System.out.println(currentRoom.getRoomDescription());
 
@@ -112,8 +99,6 @@ public class Player implements Serializable {
         int dropChance = random.nextInt(100);
         Monster monster = this.rooms.get(this.getCurrentRoomID() - 1).getRoomMonster();
 
-<<<<<<< HEAD
-=======
         Item bluePowerAide = player.getItemsArrayList().get(4);  
         Item appleJuice = player.getItemsArrayList().get(3);
 
@@ -224,7 +209,6 @@ public class Player implements Serializable {
 
         }
 
->>>>>>> 44749790a07cb02e548ef4604ee339112197a0ad
     //Author: Harrison Barnes and Niecia Say
     //methods for game class to view player and room inventory in numbered order
     public boolean viewPlayerInventory(){

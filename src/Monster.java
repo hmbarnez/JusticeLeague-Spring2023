@@ -171,7 +171,6 @@ public class Monster implements Serializable
         }
 
 
-    
 
 
 

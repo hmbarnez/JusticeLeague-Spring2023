@@ -15,8 +15,9 @@ public class Room implements Serializable {
     private String roomName;
     private String roomDescription;
     private boolean isLocked;
+    private int keyToUnlock;
 
-    public Room(int roomId, int[] roomDirections, boolean isVisited, Monster roomMonster, Puzzle roomPuzzle, ArrayList<Item> roomInventory, String roomName, String roomDescription, boolean isLocked) {
+    public Room(int roomId, int[] roomDirections, boolean isVisited, Monster roomMonster, Puzzle roomPuzzle, ArrayList<Item> roomInventory, String roomName, String roomDescription, boolean isLocked, int keyToUnlock) {
         this.roomId = roomId;
         this.roomDirections = roomDirections;
         this.isVisited = isVisited;
@@ -26,6 +27,7 @@ public class Room implements Serializable {
         this.roomName = roomName;
         this.roomDescription = roomDescription;
         this.isLocked = isLocked;
+        this.keyToUnlock = keyToUnlock;
     }
 
     //add item
@@ -75,6 +77,10 @@ public class Room implements Serializable {
         return isLocked;
     }
 
+    public int getKeyToUnlock() {
+        return keyToUnlock;
+    }
+    
     public void setVisited(boolean visited) {
         isVisited = visited;
     }
@@ -87,6 +93,7 @@ public class Room implements Serializable {
         isLocked = locked;
     }
 
+   
 
     //add toString
     @Override

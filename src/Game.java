@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Game {
@@ -5,6 +6,7 @@ public class Game {
     private static Player player;
     //private static Scanner scan;
     public static void main(String[] args) {
+        //map = new Map();
         //Main Menu
         mainMenuIntro();
     }
@@ -14,9 +16,10 @@ public class Game {
      * The mainMenuIntro method asks the user to start a new game or load from previous save.
      * Items and Room inventory menus displays all items in the room and allows user to take further action or do nothing.
      */
-    public static void newGame(){
-        map = new Map();
-        player = new Player(map);
+    public static void newGame(Player playerPara){
+        if(playerPara != null){
+            player = playerPara;
+        }
         Scanner scan = new Scanner(System.in);
         //trying something different with scan might change later
         //scan = new Scanner(System.in);
@@ -27,7 +30,7 @@ public class Game {
                 printUserOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
                 //displays user options and gets user input
-                System.out.println("_____________________");
+                System.out.println("__________________________________________________");
                 switch (userInput) {
                     case 1,2,3,4 -> {
                         player.move(userInput);
@@ -77,15 +80,19 @@ public class Game {
             System.out.println("Enter the corresponding number to choose an option: ");
             System.out.println("1. New Game");
             System.out.println("2. Load Game");
+            System.out.println("__________________________________________________");
             //Scanner scan = new Scanner(System.in);
             try{
                 int input = Integer.parseInt(scan.nextLine());
                 switch (input) {
                     case 1 -> {
-                        System.out.println("test");
-                        newGame();
+                        System.out.println("Game Intro here");
+                        newGame(new Player(new Map()));
                     }
-                    case 2 -> loadGame();
+                    case 2 -> {
+                        player = loadGame();
+                        newGame(player);
+                    }
                     default -> System.err.println("That input is not valid!");
                 }
             }catch (NumberFormatException e){
@@ -136,12 +143,14 @@ public class Game {
 
     //inventory menu
     public static void viewPlayerInventoryMenu(){
-        System.out.println("0. Exit");
-        System.out.println("or Choose Corresponding Item # to interact with: ");
+        System.out.println("Choose Corresponding Item # to interact with (or 0 to exit): ");
         Scanner scan = new Scanner(System.in);
+        
         //viewPlayerInventory returns true if there is something in the ArrayList
         //if playerInventory ArrayList is empty, the while loop is skipped
+        
         boolean exitItemMenu = player.viewPlayerInventory();
+        System.out.println("__________________________________________________");
         while (exitItemMenu){
             try{
                 int itemChoiceId = Integer.parseInt(scan.nextLine());
@@ -149,7 +158,13 @@ public class Game {
                     printErrorMessage();
                     break;
                 }
-                System.out.println("_________________________");
+                else if(itemChoiceId == 0){
+                    exitItemMenu = false;
+                    break;
+                }
+                System.out.println(player.getPlayerInventory().get(itemChoiceId-1)); //Author Brian
+                System.out.println(player.getPlayerInventory().get(itemChoiceId-1).getItemDesc()); //Author Brian
+                System.out.println("__________________________________________________");
                 System.out.println("Choose what to do with this item: ");
                 printSelectedItemOptions();
                 int userInput = Integer.parseInt(scan.nextLine());
@@ -158,14 +173,18 @@ public class Game {
                     case 1 -> {
                         player.dropItem(itemChoiceId);
                         exitItemMenu = false;
+                       System.out.println("Item Dropped");
+
                     }
                     case 2 -> {
                         player.equipItem(itemChoiceId);
                         exitItemMenu = false;
+                        System.out.println("Item Equipped");
                     }
                     case 3 -> {
                         player.useItem(itemChoiceId);
                         exitItemMenu = false;
+                        System.out.println("Item Used");
                     }
                     case 4 -> exitItemMenu = false;
                     default -> printErrorMessage();
@@ -215,14 +234,29 @@ public class Game {
     }
 
 
-    public static void loadGame(){
-        //TODO load method also change return type to: Player
-        System.out.println("TO BE IMPLEMENTED");
+    public static Player loadGame(){
+        Object temp = player;
+        try {
+            ObjectInputStream loader = new ObjectInputStream(new FileInputStream("saves/GameSave.bin"));
+            temp = loader.readObject();
+        } catch (IOException e) {
+            System.err.println("That save name does not exist!");
+            //return p1;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return (Player) temp;
     }
 
     public static void saveGame(){
-        //TODO save method
-        System.out.println("TO BE IMPLEMENTED");
+        try {
+            ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream("saves/GameSave.bin"));
+            writer.writeObject(player);
+            System.out.println("game saved");
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -244,7 +278,7 @@ public class Game {
         System.out.println("6. Search Room");
         System.out.println("\n7. Save Game");
         System.out.println("8. Exit Game");
-        
+        System.out.println("__________________________________________________");
     }
     public static void printMoveDirections(){
         System.out.println("1. North");
@@ -259,13 +293,12 @@ public class Game {
         System.out.println("2. Equip");
         System.out.println("3. Use");
         System.out.println("4. Exit");
-    }
+        System.out.println("__________________________________________________");    }
     public static void printRoomItemOptions(){
         //System.out.println("1. Pickup Item");
-        System.out.println("_____________________");
-        System.out.println("0. Exit");
-        System.out.println("or Choose Corresponding Item # to pickup: ");
-
+        System.out.println("__________________________________________________");
+        System.out.println("Choose Corresponding Item # to pickup (or 0 to exit): ");
+        
 
     }
     public static void printErrorMessage(){

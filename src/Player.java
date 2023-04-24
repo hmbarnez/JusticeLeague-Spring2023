@@ -109,6 +109,7 @@ public class Player implements Serializable {
     public void pickupItem(int itemID){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID()-1);
         this.playerInventory.add(currentRoom.getRoomInventory().get(itemID - 1));
+        System.out.println("You picked up " + currentRoom.getRoomInventory().get(itemID - 1).getItemName());
         currentRoom.removeItem(itemID);
         //System.out.println("TESTING " + currentRoom);
     }
@@ -129,20 +130,28 @@ public class Player implements Serializable {
             if(this.armor == null){
                 this.armor = (Armor) item;
                 this.maxHP += this.armor.getArmorPoints();
+                playerInventory.remove(itemID-1);
             } else {
+                //place armor back in inventory when equipping new armor
+                playerInventory.add(this.armor);
                 this.maxHP -= this.armor.getArmorPoints();
                 this.armor = (Armor) item;
                 this.maxHP += this.armor.getArmorPoints();
+                playerInventory.remove(itemID-1);
             }
             
         }else if(item instanceof Weapon){
             if(this.weapon == null){
             this.weapon = (Weapon) item;
             this.attackDmg += this.weapon.getWeaponDmg();
+            playerInventory.remove(itemID-1);
             } else {
+                //place weapon back in inventory when equipping new weapon
+                playerInventory.add(this.weapon);
                 this.attackDmg -= this.weapon.getWeaponDmg();
                 this.weapon = (Weapon) item;
                 this.attackDmg += this.weapon.getWeaponDmg();
+                playerInventory.remove(itemID-1);
             }
         }else{
             System.out.println("You can't equip that item!");

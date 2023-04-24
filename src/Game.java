@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Game {
@@ -5,6 +6,7 @@ public class Game {
     private static Player player;
     //private static Scanner scan;
     public static void main(String[] args) {
+        //map = new Map();
         //Main Menu
         mainMenuIntro();
     }
@@ -14,9 +16,10 @@ public class Game {
      * The mainMenuIntro method asks the user to start a new game or load from previous save.
      * Items and Room inventory menus displays all items in the room and allows user to take further action or do nothing.
      */
-    public static void newGame(){
-        map = new Map();
-        player = new Player(map);
+    public static void newGame(Player playerPara){
+        if(playerPara != null){
+            player = playerPara;
+        }
         Scanner scan = new Scanner(System.in);
         //trying something different with scan might change later
         //scan = new Scanner(System.in);
@@ -84,9 +87,12 @@ public class Game {
                 switch (input) {
                     case 1 -> {
                         System.out.println("Game Intro here");
-                        newGame();
+                        newGame(new Player(new Map()));
                     }
-                    case 2 -> loadGame();
+                    case 2 -> {
+                        player = loadGame();
+                        newGame(player);
+                    }
                     default -> System.err.println("That input is not valid!");
                 }
             }catch (NumberFormatException e){
@@ -228,12 +234,29 @@ public class Game {
     }
 
 
-    public static void loadGame(){
-        //TODO load method also change return type to: Player
+    public static Player loadGame(){
+        Object temp = player;
+        try {
+            ObjectInputStream loader = new ObjectInputStream(new FileInputStream("saves/GameSave.bin"));
+            temp = loader.readObject();
+        } catch (IOException e) {
+            System.err.println("That save name does not exist!");
+            //return p1;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return (Player) temp;
     }
 
     public static void saveGame(){
-        //TODO save method
+        try {
+            ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream("saves/GameSave.bin"));
+            writer.writeObject(player);
+            System.out.println("game saved");
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

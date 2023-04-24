@@ -64,10 +64,11 @@ public class Player implements Serializable {
                 
                }
            }
-           //TODO Check for monster
-           if((currentRoom.getRoomMonster().getMonsterId() != 0) && !(currentRoom.getRoomMonster().isAlive()))
+           
+           if((currentRoom.getRoomMonster().getMonsterId() != 0) && (currentRoom.getRoomMonster().isAlive()))
            {
-                Combat(null, currentRoom);
+                System.out.println("\n------------FIGHT-------------------");
+                Combat();
 
            }
            
@@ -87,15 +88,16 @@ public class Player implements Serializable {
     //Author: Adrian Japa
     //used for engaging in combat. 
     // WORK IN PROGRESS
-    public void Combat(Player player, Room currentRoom)
+    public void Combat()
     {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
         int dropChance = random.nextInt(100);
         Monster monster = this.rooms.get(this.getCurrentRoomID() - 1).getRoomMonster();
+        Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
 
-        Item bluePowerAide = player.getItemsArrayList().get(4);  
-        Item appleJuice = player.getItemsArrayList().get(3);
+        Item bluePowerAide = this.getItemsArrayList().get(4);  
+        Item appleJuice = this.getItemsArrayList().get(3);
 
         boolean combatStatus = true;
 
@@ -107,8 +109,8 @@ public class Player implements Serializable {
             System.out.println("Monster Health: " + monster.getHealthPoints());
            
             //Print player information
-            System.out.println("Player Health: " + player.getCurrentHP());
-            System.out.println("Player Attack: " + player.getAttackDmg());
+            System.out.println("Player Health: " + this.getCurrentHP());
+            System.out.println("Player Attack: " + this.getAttackDmg());
            
             System.out.println("\nWhat would you like to do?");
 
@@ -125,7 +127,7 @@ public class Player implements Serializable {
             {
                 case 1:
                     // calculate player damage and reduce monster health
-                    int playerDamage = player.getAttackDmg();
+                    int playerDamage = this.getAttackDmg();
                     System.out.println("You dealt " + playerDamage + " damage!");
                     monster.setHealthPoints(monster.getHealthPoints() - playerDamage);
                     
@@ -151,10 +153,12 @@ public class Player implements Serializable {
                         {
                             System.out.println("The " + monster.getMonsterName() + " dropped nothing!");
                         }
+                        return;
                     }
 
                         // remove monster from room
-                        currentRoom.removeMonster();
+                        //currentRoom.setRoomMonster(null);
+                        currentRoom.getRoomMonster().setIsAlive();
                         combatStatus = false; // exit combat state
                 //    }
 
@@ -162,19 +166,19 @@ public class Player implements Serializable {
                     int monsterDamage = attackDmg;
                     System.out.println("The " + monster.getMonsterName() + " dealt " + monsterDamage + " damage!");
                 //    player.reduceHealth(monsterDamage);
-                    player.setCurrentHP(player.getCurrentHP()- monsterDamage);
+                    this.setCurrentHP(this.getCurrentHP()- monsterDamage);
 
                     // check if the player has died
-                    if (player.getCurrentHP() <= 0) 
+                    if (this.getCurrentHP() <= 0) 
                     {
                         System.out.println("You died!");
 
                     //    Room previousRoom = rooms.get(previousRoomID - 1); // get previous room
-                    //    TODO - MOVE PLAYER TO PREVIOUS ROOM
-                       player.move(previousRoomID); // move player to previous room
-                        
+                   
+                  //     this.move(previousRoomID); // move player to previous room
+                        this.setCurrentRoomID(previousRoomID);
 
-                        player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
+                        this.setCurrentHP(this.getMaxHP() / 2); // restore 50% of max health
             //            Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
             //            currentRoom.addItem(item); // add item to room inventory
 
@@ -188,13 +192,20 @@ public class Player implements Serializable {
                     break;
                 case 2:
                      System.out.println("You run away from the " + monster.getMonsterName() + "!");
+                     this.setCurrentRoomID(previousRoomID);
+                     System.out.println("You are now in the " + this.rooms.get(this.getCurrentRoomID() - 1).getRoomName() + "!");
                     combatStatus = false; // exit combat state
                     break;
                 case 3:
                     System.out.println("Which item would you like to use?");
-                    player.getPlayerInventory();
+                //    this.getPlayerInventory();
+                    this.viewPlayerInventory();
+
                     int itemChoice = input.nextInt();
-                    player.useItem(itemChoice);
+                    System.out.println("You used a " + this.playerInventory.get(itemChoice - 1).getItemName() + "!");
+                    this.useItem(itemChoice);
+                  //  this.getPlayerInventory();
+                  
                     break;
                 default:
                     System.out.println("Invalid command!");

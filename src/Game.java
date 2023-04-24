@@ -67,6 +67,7 @@ public class Game {
                 printErrorMessage();
             }
             //end of try catch block
+            
         }
     }
 
@@ -86,7 +87,7 @@ public class Game {
                 int input = Integer.parseInt(scan.nextLine());
                 switch (input) {
                     case 1 -> {
-                        System.out.println("Game Intro here");
+                        System.out.println("Jonathan embarks on a journey through his home");
                         newGame(new Player(new Map()));
                     }
                     case 2 -> {

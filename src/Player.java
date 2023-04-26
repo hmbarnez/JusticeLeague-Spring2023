@@ -8,7 +8,7 @@ public class Player implements Serializable {
 
     private int currentRoomID;
     private ArrayList<Room> rooms;
-    private ArrayList<Item> playerInventory;
+    private ArrayList<Item> playerInventory = new ArrayList<>();
     private int maxHP;
     private int attackDmg;
     private Armor armor;
@@ -22,7 +22,7 @@ public class Player implements Serializable {
     public Player(Map map){
         this.currentRoomID = 1;
         this.rooms = map.readRooms();
-        this.playerInventory = new ArrayList<>();
+        //this.playerInventory = new ArrayList<>();
         this.maxHP = 100;
         this.attackDmg = 10;
         this.armor = null;
@@ -37,11 +37,9 @@ public class Player implements Serializable {
     public void move(int direction)
     {
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
-<<<<<<< HEAD
-=======
         previousRoomID = currentRoom.getRoomId();
         //Room nextRoom = null;
->>>>>>> 2b8a4286066238f20c7998925fb9c80ea8db4d40
+
         direction -= 1;
        if(currentRoom.roomDirections[direction] == 0)
        {
@@ -163,6 +161,8 @@ public class Player implements Serializable {
                         {
                             System.out.println("The " + monster.getMonsterName() + " dropped nothing!");
                         }
+                          currentRoom.getRoomMonster().setIsAlive(false);
+                          combatStatus = false; // exit combat state
 
                         return;
 
@@ -171,8 +171,6 @@ public class Player implements Serializable {
                         // remove monster from room
                         //currentRoom.setRoomMonster(null);
                         //currentRoom.getRoomMonster().setIsAlive(false);
-                        currentRoom.getRoomMonster().setIsAlive(false);
-                        combatStatus = false; // exit combat state
 
                 //    }
 
@@ -339,43 +337,7 @@ public class Player implements Serializable {
         }
     }
 
-    //Author: Adrian Japa
-    //I dont know your plan for these methods but i left them here,
-    // just uncomment and commit/push them if you use them -harrison
 
-//    public void getPlayer()
-//    {
-//        //TODO
-//    }
-//
-//    //Method to calculate player damage reduction
-//    public void takeDamage(int damage)
-//    {
-//        int actualDamageTaken = damage - this.armor.getArmorValue();
-//        this.currentHP -= actualDamageTaken;
-//        System.out.println(this.getPlayer(); + " has recieved " + actualDamageTaken + " damage.");
-//        if(this.maxHP <= 0)
-//        {
-//            this.isAlive = false;
-//            System.out.println(this.getPlayer(); + " has died.");
-//        }
-//
-//    }
-//    //used to see if player is alive or not after damage is taken
-//    public boolean isAlive()
-//    {
-//        if(this.currentHP > 0)
-//        {
-//            return true;
-//        }
-//        else
-//        {
-//            return false;
-//        }
-//
-//        )
-//        return true;
-//    }
 
     //Getters
     public int getCurrentRoomID() {

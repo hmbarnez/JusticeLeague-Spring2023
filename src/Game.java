@@ -107,43 +107,6 @@ public class Game {
 
     }
 
-    //move menu not used
-    public static void moveMenu(){
-
-        boolean exitMoveMenu = false;
-        Scanner scan = new Scanner(System.in);
-        while(!exitMoveMenu){
-            try {
-
-                printMoveDirections();
-                int moveDirection = Integer.parseInt(scan.nextLine());
-                switch (moveDirection) {
-                    case 1 -> {
-                        player.move(0);
-                        exitMoveMenu = true;
-                    }
-                    case 2 -> {
-                        player.move(1);
-                        exitMoveMenu = true;
-                    }
-                    case 3 -> {
-                        player.move(2);
-                        exitMoveMenu = true;
-                    }
-                    case 4 -> {
-                        player.move(3);
-                        exitMoveMenu = true;
-                    }
-                    default -> printErrorMessage();
-                }
-            }catch (NumberFormatException e){
-                //System.out.println("MOVEMENU_ERROR");
-                printErrorMessage();
-            }
-        }
-        //System.out.println("test sout, end of move menu");
-    }
-
 
     //inventory menu
     public static void viewPlayerInventoryMenu(){
@@ -285,13 +248,7 @@ public class Game {
         System.out.println("8. Exit Game");
         System.out.println("__________________________________________________");
     }
-    public static void printMoveDirections(){
-        System.out.println("1. North");
-        System.out.println("2. East");
-        System.out.println("3. South");
-        System.out.println("4. West");
-        System.out.println("Enter number direction to move: ");
-    }
+
     //Might have to move inventory option prints to the player class
     public static void printSelectedItemOptions(){
         System.out.println("1. Drop");

@@ -32,7 +32,6 @@ public class Player implements Serializable {
     //Author: Niecia
     public void move(int direction){
         Room currentRoom = this.rooms.get(this.getCurrentRoomID() - 1);
-        //Room nextRoom = null;
         direction -= 1;
        if(currentRoom.roomDirections[direction] == 0)
        {
@@ -68,7 +67,6 @@ public class Player implements Serializable {
            //update the isVisited
            currentRoom.setVisited(true);
        }
-        //System.out.println(nextRoom.getRoomDescription() + " " + nextRoom.getRoomId());
 
     }
 

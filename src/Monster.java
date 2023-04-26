@@ -1,9 +1,12 @@
 import java.io.Serializable;
+import java.util.Random;
 /*
  * Author: Adrian Japa
  * This class is in charge of creating the monsters that will be used in the game.
  */
 import java.util.Scanner;
+
+import javax.lang.model.util.ElementScanner14;
 
 
 public class Monster implements Serializable
@@ -52,111 +55,39 @@ public class Monster implements Serializable
 //        }
 //    }
     
-    //Author: Adrian Japa
-    //used for engaging in combat. 
-    // WORK IN PROGRESS
-    public void combat(Player player, Room currentRoom)
-    {
-        Scanner input = new Scanner(System.in);
-        Random random = new Random();
-
-
-
-        boolean combatStatus = true;
-
-        //while loop for combat
-        while(combatStatus)
-        {
-            //Print monster information
-            System.out.println("You have encountered a " + this.monsterName + "!");
-            System.out.println("Monster Health: " + this.healthPoints);
-           
-            //Print player information
-            System.out.println("Player Health: " + player.getCurrentHP());
-            System.out.println("Player Attack: " + player.getAttackDmg());
-           
-            System.out.println("\nWhat would you like to do?");
-
-            //Print user input options
-            System.out.println("1. Attack");
-            System.out.println("2. Run");
-            System.out.println("3. Use Item");
-
-            //Get user input
-            int userInput = input.nextInt();
-            
-            //Switch statement for user input
-            switch(userInput)
-            {
-                case 1:
-                    // calculate player damage and reduce monster health
-                    int playerDamage = player.getAttackDmg();
-                    System.out.println("You dealt " + playerDamage + " damage!");
-                    healthPoints -= playerDamage;
-
-                    // check if monster is defeated
-                    if (healthPoints <= 0) {
-                        System.out.println("You defeated the " + monsterName + "!");
-
-                      ///////// 
-                        // 33% chance of monster dropping item
-                        if (random.nextInt(3) == 0) {
-                            String itemName = "Consumable Item"; // change this to actual item name
-                            Item item = new Item(itemName, "Description"); // create item object
-                            currentRoom.addItem(item); // add item to room inventory
-                            System.out.println("The " + monsterName + " dropped a " + itemName + "!");
-                        }
-
-                        // remove monster from room
-                        currentRoom.removeMonster();
-                        combatStatus = false; // exit combat state
-                    }
-
-                    // monster attacks back
-                    int monsterDamage = attackDmg;
-                    System.out.println("The " + monsterName + " dealt " + monsterDamage + " damage!");
-                    player.reduceHealth(monsterDamage);
-
-                    // check if the player has died
-                    if (player.getCurrentHP() <= 0) {
-                        System.out.println("You died!");
-                        player.setCurrentHP(player.getMaxHP() / 2); // restore 50% of max health
-                        Item item = new Item("Blue Powerade", "Restores 50 health"); // create item object
-                        currentRoom.addItem(item); // add item to room inventory
-                        combatStatus = false; // exit combat state
-                    }
-                    break;
-                case 2:
-                     System.out.println("You run away from the " + monsterName + "!");
-                    combatStatus = false; // exit combat state
-                    break;
-                case 3:
-                    System.out.println("Which item would you like to use?");
-                    player.getPlayerInventory();
-                    int itemChoice = input.nextInt();
-                    player.useItem(itemChoice);
-                    break;
-                default:
-                    System.out.println("Invalid command!");
-            }
-            }
-
-
-        }
-
-
-
-
+    
 
     // getters and setters
+    public boolean isAlive() 
+    {
+        return isAlive;
+    }
 
+    public void setIsAlive(boolean b)
+    {
+        this.isAlive = b;
+    }
+
+    public String getMonsterName()
+    {
+        return monsterName;
+    }
 
     public int getMonsterId() {
         return monsterId;
     }
 
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
     public int getHealthRegen() {
         return healthRegen;
+    }
+
+    public int setHealthPoints(int healthPoints) 
+    {
+        return this.healthPoints = healthPoints;
     }
 
     public void setHealthRegen(int healthRegen) {
@@ -174,4 +105,6 @@ public class Monster implements Serializable
                 ", isAlive=" + isAlive +
                 '}';
     }
+  
+   
 }

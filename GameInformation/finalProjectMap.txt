@@ -14,7 +14,7 @@
 14~10~15~0~12~false~6~0~0~Foyer~With the chandelier lights constantly flickering, there is a sort of loneliness in this foyer. Ironic since it's supposed to be inviting.~false~99
 15~0~17~16~14~false~3~0~4~Living Room~The sofa rejects you from you try to seat on team, not to mention the floor is lava. Also, that tv doesn’t look right.~true~6
 16~15~0~0~0~false~0~0~8~Laundry Room~The washer and dryer are shaking violently with the cabinets shut ting and open ing their doors non-stop.~false~99
-17~18~19~0~15~false~7~6~4,5~Guest Bathroom~A step-up from the master bathroom which isn’t saying much. Although the floor is wet as the sink is running.~false~99
+17~18~19~0~15~false~7~2~4,5~Guest Bathroom~A step-up from the master bathroom which isn’t saying much. Although the floor is wet as the sink is running.~false~99
 18~0~0~17~0~false~2~0~0~Towel Closet~In the closet of used towel, but there isn’t exactly any other alternative to dry the floor.~false~99
 19~0~20~0~17~false~0~0~13~Guest Bedroom~With no working lights and a punched hole in the wall some thing going on here.~false~99
 20~0~0~0~19~false~0~0~9~Guest Closet~Now a regular old closet, an opportunity to contemplate on what to do next.~false~99
